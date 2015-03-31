@@ -1,0 +1,24 @@
+<div class="container">
+	<div class="center-block">
+		<h1> View all of your posts </h1>
+			<% @posts.each do |post| %>
+				<div class="col-xs-4">
+				<p>
+				Title:
+				<%= post.title %>
+				<br>
+				Created At:
+				<%= post.created_at %>
+				<br>
+				<%= post.body %>
+				<br>
+				<%= link_to "Read More", post_path(post), class: "btn btn-success"%>
+				<br> 
+			<%= link_to "Edit", edit_post_path(post) %>
+				<hr>
+				</p>
+			</div>
+		<% end %>
+	</div>
+</div>
+

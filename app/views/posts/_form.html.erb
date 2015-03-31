@@ -1,0 +1,22 @@
+<%# partial used for my posts forms for creating posts and adding posts %>
+
+<%#add an area to display any errors the come up 
+when trying to create a post %>
+<% @post.errors.full_messages.each do |message| %>
+	<%= message %>
+	<br>
+<% end %>
+		
+
+<%# put my partial for the form %>
+<%# going to be used for the new post, @post referenced
+in my posts_controller %>
+<%= form_for @post do |f| %>
+	<%= f.label :title %>
+	<%= f.text_field :title %>
+	<br>
+	<%= f.label :body %>
+	<%= f.text_area :body%>
+	<br>
+	<%= f.submit %> 
+<% end %>

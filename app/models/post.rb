@@ -11,4 +11,13 @@ class Post < ActiveRecord::Base
 	
 	#--------------------------------------------------------
 
+
+	#CLASS METHODS ------------------------------------------
+	#sort the posts by the most recent
+	def self.latest
+		Post.order("created_at DESC")
+	end
+
+	#--------------------------------------------------------
+
 end
