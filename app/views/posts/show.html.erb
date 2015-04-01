@@ -1,9 +1,28 @@
 <h1>Here is your post!</h1>
 
-<%# display the post using my instance variable from the posts_controller %>
+<%# display the post using instance variable from the posts_controller %>
 <h3><%= @post.title %></h3>
 <p><%= @post.body %></p>
 
 <%# Add a link to edit your post %>
 <%= link_to "Edit", edit_post_path(@post) %>
-<%= button_to "Delete", post_path(@post), method: :delete, data: {confirm: "Are you sure you want to delete?"} %>
+<%= button_to "Delete", post_path(@post), method: :delete, data: {confirm: 
+											"Are you sure you want to delete?"} %>
+<br>
+<br>
+
+<%# Create a new comment %>
+<%= form_for @comment, url: post_comments_path(@post) do |f| %>
+	<%= f.text_area :body, placeholder: "Your Comment Goes Here" %>
+	<br>
+	<%= f.submit "Submit Comment" %>
+<% end %>
+
+<br>
+
+<%# View My Comments %>
+<% @comments.each do |comment| %>
+	<%= comment.body %>
+	<br>
+	<hr>
+<% end %>

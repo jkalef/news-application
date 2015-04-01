@@ -35,6 +35,9 @@ before_action :find_post, only: [:show, :edit, :update, :destroy]
 	# GET
 	# URL /posts/:id
 	def show
+		#instantiate a new comment
+		@comment = Comment.new
+		@comments = @post.comments.most_recent_comments 
 	end
 
 

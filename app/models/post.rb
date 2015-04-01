@@ -1,7 +1,10 @@
 class Post < ActiveRecord::Base
 
-	#VALIDATIONS --------------------------------------------
+	#---ASSOCIATIONS----------------------------------------
+	has_many :comments, dependent: :destroy
 
+
+	#VALIDATIONS --------------------------------------------
 	#title is required and must be unique
 	validates :title, presence: true,
       	              uniqueness: true
@@ -9,8 +12,6 @@ class Post < ActiveRecord::Base
 	#body is rquired
 	validates :body, presence: true
 	
-	#--------------------------------------------------------
-
 
 	#CLASS METHODS ------------------------------------------
 	#sort the posts by the most recent
@@ -18,6 +19,5 @@ class Post < ActiveRecord::Base
 		Post.order("created_at DESC")
 	end
 
-	#--------------------------------------------------------
 
 end

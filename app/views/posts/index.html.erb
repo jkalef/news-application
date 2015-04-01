@@ -10,7 +10,7 @@
 				Created At:
 				<%= post.created_at %>
 				<br>
-				<%= post.body %>
+				<%= truncate(post.body, length: 10) %>
 				<br>
 				<%= link_to "Read More", post_path(post), class: "btn btn-success"%>
 				<br> 
