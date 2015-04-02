@@ -2,6 +2,7 @@ class Comment < ActiveRecord::Base
 
 	#ASSOCIATIONS -------------------------------
 	belongs_to :post
+	belongs_to :user
 
 
 

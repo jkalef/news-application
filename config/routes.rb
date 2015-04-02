@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
 
+  devise_for :users
 	#HOME ROUTES --------------------------------------
-	root "home#index"
+	root "posts#index"
 	get "/about" => "home#about", as: :about
 	get "/contact" => "home#contact", as: :contact
 

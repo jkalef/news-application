@@ -1,5 +1,13 @@
 class CommentsController < ApplicationController
 
+#---BEFORE ACTIONS--------------------------------------------
+#from DEVISE
+before_action :authenticate_user!
+
+
+#---ACTIONS-----------------------------------------------------
+
+
 	def create
 		@post			= Post.find(params[:post_id])
 		@comment    	= Comment.new(comment_params)
@@ -14,6 +22,8 @@ class CommentsController < ApplicationController
 	end
 
 
+
+#--CLASS METHODS---------------------------------------------------
 	private
 
 	def comment_params

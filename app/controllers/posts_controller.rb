@@ -1,7 +1,14 @@
 class PostsController < ApplicationController
 
+#--BEFORE ACTIONS--------------------------------------------------
+#from DEVISE
+before_action :authenticate_user!, except: [:index, :show]
+
 #this will allow my to use the method find_post in the listed actions
 before_action :find_post, only: [:show, :edit, :update, :destroy]
+
+
+#--ACTIONS----------------------------------------------------------
 
 	# GET
 	# URL /posts
@@ -22,7 +29,8 @@ before_action :find_post, only: [:show, :edit, :update, :destroy]
 	# URL /posts
 	def create
 		#pass in the post params
-		@post = Post.new(post_params)
+		#need to get the current users information to show who made the post
+		@post = current_user.posts.new(post_params)
 
 		if @post.save
 			redirect_to post_path(@post), notice: "post successfuly created"
@@ -37,6 +45,7 @@ before_action :find_post, only: [:show, :edit, :update, :destroy]
 	def show
 		#instantiate a new comment
 		@comment = Comment.new
+		#use this to display all of the comments, sorted by most recent
 		@comments = @post.comments.most_recent_comments 
 	end
 
@@ -67,7 +76,8 @@ before_action :find_post, only: [:show, :edit, :update, :destroy]
 		redirect_to posts_path, notice: "Post successfully deleted"
 	end
 
-	#some methods just for use in this controller
+
+	#--CLASS METHODS---------------------------------------------------------
 	private
 
 

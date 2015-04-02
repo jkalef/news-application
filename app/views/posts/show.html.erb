@@ -2,7 +2,12 @@
 
 <%# display the post using instance variable from the posts_controller %>
 <h3><%= @post.title %></h3>
+	<% if user_signed_in? %>
+		<%= @post.user.show_name %>
+	<% end %>
 <p><%= @post.body %></p>
+
+	
 
 <%# Add a link to edit your post %>
 <%= link_to "Edit", edit_post_path(@post) %>
