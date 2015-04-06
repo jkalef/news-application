@@ -12,8 +12,9 @@
 	<%= link_to "About", about_path %>  |
 	<%= link_to "All Posts", posts_path %>  |
 	<%= link_to "Create A New Post", new_post_path %>  |
-	<%= link_to "Contact Us", contact_path %>
+	<%= link_to "Contact Us", contact_path %> |
 
+	<%# display the users name if they are logged in.  If not, display the sign-in link%>
 	<% if user_signed_in? %>
 	<p>Hello <%= current_user.show_name %></p>
 		<%= link_to "Logout", destroy_user_session_path, method: :delete %>
@@ -25,6 +26,13 @@
 <hr>
 <%= flash[:notice] || flash[:alert] %>
 <hr>
+
+<%# search for posts with a specific term %>
+<%= form_tag(posts_path, method: "get") do %>
+  	<%= label_tag(:search_word, "Search for:") %>
+  	<%= text_field_tag(:search_word) %>
+  	<%= submit_tag("Search") %>
+<% end %>
 
 <%= yield %>
 

@@ -20,5 +20,10 @@ class Post < ActiveRecord::Base
 		Post.order("created_at DESC")
 	end
 
+	#search for a specific keyword in the posts
+	def self.search(search_term)
+		Post.where("title ILIKE ? OR body ILIKE ?", "%#{search_term}%", "%#{search_term}%")
+	end
+
 
 end

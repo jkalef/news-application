@@ -3,7 +3,7 @@
 <%# display the post using instance variable from the posts_controller %>
 <h3><%= @post.title %></h3>
 	<% if user_signed_in? %>
-		<%= @post.user.show_name %>
+		<%= @post.user %>
 	<% end %>
 <p><%= @post.body %></p>
 
@@ -28,6 +28,8 @@
 <%# View My Comments %>
 <% @comments.each do |comment| %>
 	<%= comment.body %>
+	<br>
+	<%= comment.user %>
 	<br>
 	<hr>
 <% end %>

@@ -13,9 +13,13 @@ before_action :find_post, only: [:show, :edit, :update, :destroy]
 	# GET
 	# URL /posts
 	def index
+		if params[:search_word]
+			@posts = Post.search(params[:search_word])
+		else
 		#want to list all of the posts by ascending order
 		#.latest is a method from my post model
-		@posts = Post.latest
+			@posts = Post.latest
+		end
 	end
 
 	# GET
@@ -72,8 +76,14 @@ before_action :find_post, only: [:show, :edit, :update, :destroy]
 	# URL /posts/:id
 	def destroy
 		@post.destroy
-
 		redirect_to posts_path, notice: "Post successfully deleted"
+	end
+
+
+	#action to view posts belonging to a specific user
+	def your_posts
+		#@user = User.find(params[:id])
+		@posts = current_user.posts.all
 	end
 
 

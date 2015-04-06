@@ -10,7 +10,7 @@ before_action :authenticate_user!
 
 	def create
 		@post			= Post.find(params[:post_id])
-		@comment    	= Comment.new(comment_params)
+		@comment    	= current_user.comments.new(comment_params)
 		#this associates the comment to the specific post_id
 		@comment.post 	= @post
 
