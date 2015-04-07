@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
   #--ASSOCIATIONS------------------------------------------
   has_many :posts, dependent: :nullify
   has_many :comments, dependent: :nullify
+  has_many :readings, dependent: :destroy
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable

@@ -65,7 +65,7 @@ before_action :find_post, only: [:show, :edit, :update, :destroy]
 	def update
 		#if successful, render the show page
 		if @post.update(post_params)
-			redirect_to post_path(@post), notice: "post successfully updated!"
+			redirect_to root_path, notice: "post successfully updated!"
 		else
 			render :edit
 		end
@@ -93,7 +93,7 @@ before_action :find_post, only: [:show, :edit, :update, :destroy]
 
 	def post_params
 		#strong params
-		post_params = params.require(:post).permit(:title, :body)
+		post_params = params.require(:post).permit(:title, :body, :reading_id)
 	end
 
 	def find_post

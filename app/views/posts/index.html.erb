@@ -15,10 +15,23 @@
 				<%= link_to "Read More", post_path(post), class: "btn btn-success"%>
 				<br> 
 				<%= link_to "Edit", edit_post_path(post) %>
+				<br>
+
+				<%= link_to "Add To Reading List", post_path(post, params[:reading_id] => {reading_id: 1}, method: :patch) %>
+				<br>
+					<%= form_for post do |f| %>
+					<%= f.hidden_field :reading_id, value: 1 %>
+					<%= f.submit "Add To Reading List" %>
+				<% end %>
 				<hr>
+				<br>
 				</p>
 			</div>
 		<% end %>
 	</div>
 </div>
+
+
+
+
 
