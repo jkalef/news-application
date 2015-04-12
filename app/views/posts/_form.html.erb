@@ -18,8 +18,9 @@
 	<%= form_for @post do |f| %>
 		<%= f.text_field :title, {class: "form-control", placeholder: "Your super-catchy article title here..." } %>
 		<br>
+		<%= f.file_field :picture %>
 		<br>
 		 <%= f.text_area :body, {class: "form-control", rows: 30, placeholder: "Your amazing article here..."} %>
 		<br>
 		<%= f.submit "Submit Blog Post", {class: ".btn-lg btn btn-success"} %> 
-	<% end %>
+		<% end %>

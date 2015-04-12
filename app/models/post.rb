@@ -5,6 +5,13 @@ class Post < ActiveRecord::Base
 	belongs_to :user
 	belongs_to :reading
 
+	has_many :favorites, dependent: :destroy
+	has_many :users_who_favorited, through: :favorites, source: :user
+
+
+	has_attached_file :picture, :styles => { :medium => "350x350>", :thumb => "100x100>" }
+			##url => "/rails_root/public/system/posts/pictures/:id/:style/:basename.:extension"
+	validates_attachment_content_type :picture, :content_type => /\Aimage\/.*\Z/	
 
 	#VALIDATIONS --------------------------------------------
 	#title is required and must be unique

@@ -13,6 +13,13 @@ before_action :find_post, only: [:show, :edit, :update, :destroy]
 	# GET
 	# URL /posts
 	def index
+		# if params[:reading_id]
+		# #for the reading list
+		# 	@post = Post.find(params[:id])
+		# 	@add_to_list = current_user.readings.find(params[:reading_id])
+		# 	@post.add_to_list = @add_to_list
+		# end
+
 		if params[:search_word]
 			@posts = Post.search(params[:search_word])
 		else
@@ -32,6 +39,7 @@ before_action :find_post, only: [:show, :edit, :update, :destroy]
 	# POST
 	# URL /posts
 	def create
+		
 		#pass in the post params
 		#need to get the current users information to show who made the post
 		@post = current_user.posts.new(post_params)
@@ -93,7 +101,7 @@ before_action :find_post, only: [:show, :edit, :update, :destroy]
 
 	def post_params
 		#strong params
-		post_params = params.require(:post).permit(:title, :body, :reading_id)
+		post_params = params.require(:post).permit(:title, :body, :reading_id, :picture)
 	end
 
 	def find_post
@@ -103,6 +111,12 @@ before_action :find_post, only: [:show, :edit, :update, :destroy]
 
 end
 
+
+#--RANDOM NOTES--------------------------------
+#use this format to make an edit form on the same page,
+#as opposed to having to change the page
+# <div class="edit-form">--make hidden
+# add the form_for
 
 
 

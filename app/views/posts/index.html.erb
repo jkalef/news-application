@@ -10,19 +10,21 @@
 				Created At:
 				<%= post.created_at %>
 				<br>
+				<%= image_tag post.picture.url(:thumb) %>
+				<br>
+				<br>
 				<%= truncate(post.body, length: 10) %>
 				<br>
 				<%= link_to "Read More", post_path(post), class: "btn btn-success"%>
 				<br> 
 				<%= link_to "Edit", edit_post_path(post) %>
 				<br>
-
-				<%= link_to "Add To Reading List", post_path(post, params[:reading_id] => {reading_id: 1}, method: :patch) %>
-				<br>
-					<%= form_for post do |f| %>
-					<%= f.hidden_field :reading_id, value: 1 %>
-					<%= f.submit "Add To Reading List" %>
-				<% end %>
+				<% favorite = post.favorites.find_by_user_id(current_user.id) if user_signed_in? %>
+						<% if favorite %> 
+								<%= link_to "Remove From Favorites", [post, favorite], method: :delete %>
+						<% else %>
+								<%= link_to "Add to Favorites", post_favorites_path(post), method: :post %>
+						<% end %>		
 				<hr>
 				<br>
 				</p>

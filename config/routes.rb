@@ -19,12 +19,12 @@ Rails.application.routes.draw do
 	# delete '/posts/:id' => 'posts#destroy'
 	resources :posts do
 		resources :comments
+		resources :favorites, only: [:create, :update, :destroy]
 	end
 
 	#this will list the posts only created by that user
 	get "/posts/:user_id" => "posts#your_posts", as: :your_posts
-	#send users to the new post page when they sign up and sign in
-	#have to do this to over
-	#get "/post/new" => "posts#new", as: "user_root"
+
+	resources :favorites, only: [:index]
 
 end

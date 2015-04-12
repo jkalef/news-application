@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+gem "paperclip", "~> 4.2"
+
 #add user authentication
 gem "devise"
 

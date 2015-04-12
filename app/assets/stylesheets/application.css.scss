@@ -14,5 +14,29 @@
  *= require_self
  */
 
-@import "bootstrap"
+@import "bootstrap";
+
+/* -- DIV STYLES ----- */
+
+.for-sign-up {
+  border: 1px solid gray;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+
+
+
+/*--TYPOGRAPHY ------ */
+
+.sign-up {
+  color: gray;
+  font-size: 30px;
+  padding-bottom: 25px;
+}
+
+.middle {
+  margin: 0 auto;
+}
+
 

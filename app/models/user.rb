@@ -1,9 +1,14 @@
 class User < ActiveRecord::Base
 
   #--ASSOCIATIONS------------------------------------------
+  #one to many
   has_many :posts, dependent: :nullify
   has_many :comments, dependent: :nullify
   has_many :readings, dependent: :destroy
+
+  #many to many
+  has_many :favorites, dependent: :destroy
+  has_many :favorite_posts, through: :favorites, source: :post
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
