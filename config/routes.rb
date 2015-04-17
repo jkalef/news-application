@@ -26,6 +26,9 @@ Rails.application.routes.draw do
 	#this will list the posts only created by that user
 	get "/posts/:user_id" => "posts#your_posts", as: :your_posts
 
+	#from delayed_job_web GEM-----------------------------------------
+	match "/delayed_job" => DelayedJobWeb, :anchor => false, via: [:get, :post]
+
 	resources :favorites, only: [:index]
 
 end

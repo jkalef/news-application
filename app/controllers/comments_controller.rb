@@ -14,7 +14,7 @@ before_action :authenticate_user!
 
 		if @comment.save
 			#email post creater if the comment was saved
-			CommentsMailer.notify_post_owner(@comment).deliver
+			CommentsMailer.notify_post_owner(@comment).deliver_later
 			redirect_to post_path(@post)
 		else
 			render "posts/show"

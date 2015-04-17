@@ -1,0 +1,14 @@
+<p>Hello <%= @user.show_name %></p>
+<br>
+<p>Here is your daily summary of comments on your posts</p>
+
+<% @posts.each do |post| %>
+  <%= post.title %>
+  <br>
+  <hr>
+    <% post.comments.each do |comment| %>
+      <%= comment.body %>
+      <br>
+    <% end %>
+<% end %>
+
