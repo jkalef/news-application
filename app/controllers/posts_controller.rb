@@ -4,33 +4,37 @@ class PostsController < ApplicationController
 #from DEVISE
 before_action :authenticate_user!, except: [:index, :show]
 
-#this will allow my to use the method find_post in the listed actions
+#from the private methods below
 before_action :find_post, only: [:show, :edit, :update, :destroy]
 
 
 #--ACTIONS----------------------------------------------------------
 
-  # GET
-  # URL /posts
   def index
-    # if params[:reading_id]
-    # #for the reading list
-    #   @post = Post.find(params[:id])
-    #   @add_to_list = current_user.readings.find(params[:reading_id])
-    #   @post.add_to_list = @add_to_list
-    # end
-
-    if params[:search_word]
-      @posts = Post.search(params[:search_word])
+    #--Fun search methods---------
+    #regular search, display normal results
+    if params[:commit] == "Search"
+          @posts = Post.search(params[:search_word]).latest
+    #lucky search, display a random result
+    elsif params[:commit] == "I'm Feeling Lucky"
+          @post = Post.lucky_search(params[:search_word])
+            #check if there actually are any matches, if not, pick
+            #just a random post from the list to show
+            if defined? @post.id
+              redirect_to post_path(@post)
+            else
+              @post = Post.all.sample
+              redirect_to post_path(@post), notice: "No results matched your search,
+                                        but here's a random post anyways!"
+            end
     else
-    #want to list all of the posts by ascending order
-    #.latest is a method from my post model
-      @posts = Post.latest
+    #default view of no search query is made
+    @posts = Post.latest
     end
+  #-close index action
   end
 
-  # GET
-  # URL /posts/new
+  
   def new
     #need to instantiate a new Post for our post method to get to
     @post = Post.new

@@ -1,14 +1,18 @@
 <p>Hello <%= @user.show_name %></p>
 <br>
-<p>Here is your daily summary of comments on your posts</p>
+<p>Here is your daily summary of comments on your posts:</p>
 
-<% @posts.each do |post| %>
-  <%= post.title %>
-  <br>
-  <hr>
-    <% post.comments.each do |comment| %>
-      <%= comment.body %>
-      <br>
+<table class="table">
+      <tr>
+        <th>Post Title</th>
+        <th>Comment</th>
+      </tr>
+    <% @comments.each do |comment| %>
+      <tr>
+          <td><%= comment.post.id %></td>
+          <td><%= comment.body %></td>
+      </tr>   
     <% end %>
-<% end %>
+</table>
+
 

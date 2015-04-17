@@ -12,6 +12,7 @@ before_action :authenticate_user!
 		#this associates the comment to the specific post_id
 		@comment.post 	= @post
 
+		
 		if @comment.save
 			#email post creater if the comment was saved
 			CommentsMailer.notify_post_owner(@comment).deliver_later
@@ -21,6 +22,10 @@ before_action :authenticate_user!
 		end
 	end
 
+	def edit
+		@post = Post.find(params[:post_id])
+		@comment = Comment.find(params[:id])
+	end
 
 	def destroy
 		@post = Post.find(params[:post_id])

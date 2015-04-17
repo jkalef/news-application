@@ -30,6 +30,8 @@ class Post < ActiveRecord::Base
 
 	#CLASS METHODS ------------------------------------------
 	#sort the posts by the most recent
+
+
 	def self.latest
 		Post.order("created_at DESC")
 	end
@@ -39,5 +41,9 @@ class Post < ActiveRecord::Base
 		Post.where("title ILIKE ? OR body ILIKE ?", "%#{search_term}%", "%#{search_term}%")
 	end
 
+	#lucky search will only return one post
+	def self.lucky_search(search_term)
+		Post.where("title ILIKE ? OR body ILIKE ?", "%#{search_term}%", "%#{search_term}%").sample
+	end
 
 end
