@@ -33,8 +33,13 @@ before_action :authenticate_user!
 	def destroy
 		@post = Post.find(params[:post_id])
 		@comment = Comment.find(params[:id])
-		@comment.destroy
-		redirect_to post_path(@post), notice: "record deleted"
+
+
+			@comment.destroy		
+			respond_to do |format|
+				format.html { redirect_to post_path(@post), notice: "record deleted" }
+				format.js { render }
+			end
 	end
 
 

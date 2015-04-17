@@ -1,4 +1,6 @@
-<%# View My Comments %>
+        
+<div id="<%= dom_id(comment) %>">
+        <%# View My Comments %>
         <%= comment.body %>
         <br>
         <%= comment.user %>
@@ -6,5 +8,6 @@
       <%#--EDIT COMMENTS ONLY IF THEY WERE MADE 15 MINUTES AGO OR LESS %>
         <%= link_to "Edit This Comment", edit_post_comment_path(@post, comment), class: "edit-comment-link" %>
         <br>
-        <%= button_to "Delete Comment", post_comment_path(@post, comment), method: :delete, data: {confirm: "are you sure you want to delete this comment?"} %>
+        <%= button_to "Delete Comment", post_comment_path(@post, comment), method: :delete, remote: true, data: {confirm: "are you sure you want to delete this comment?"} %>
         <hr>
+</div>

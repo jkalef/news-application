@@ -22,7 +22,7 @@
 			<br>
 			<br>
 
-			<%#--Refer to the comment form partial to create a new comment %>
+			<%#--Refer to the 'comment form' partial to create a new comment %>
 			<div class="comment-form">
 				<h2>Add A Comment</h2>
 				<%= render partial: "/comments/form" %>
@@ -30,7 +30,7 @@
 
 			<br>
 
-			<%#--Refer to _comment partial to display all the comments %>
+			<%#--Refer to comment partial to display all the comments %>
 			<h2>View Comments</h2>
 			<div class="comments">
 				<% @comments.each do |comment| %>
