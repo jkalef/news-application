@@ -1,0 +1,6 @@
+$('.comments').prepend("<%= j render partial: '/comments/comment', locals: {comment: @comment} %>")
+
+<%# this will re-render the form after a failed attempt or a successful attempt %>
+<% @comment = Comment.new %>
+$(".comment-form").html("<%= j render partial: '/comments/form' %>");
+

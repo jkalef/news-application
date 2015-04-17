@@ -12,13 +12,16 @@ before_action :authenticate_user!
 		#this associates the comment to the specific post_id
 		@comment.post 	= @post
 
-		
-		if @comment.save
-			#email post creater if the comment was saved
-			CommentsMailer.notify_post_owner(@comment).deliver_later
-			redirect_to post_path(@post)
-		else
-			render "posts/show"
+		respond_to do |format|
+				if @comment.save
+					#email post creater if the comment was saved
+					CommentsMailer.notify_post_owner(@comment).deliver_later
+					format.html { redirect_to post_path(@post) }
+					format.js	  { render :create_success }
+				else
+					format.html { render "posts/show" }
+					format.js   { render :create_failure }
+				end
 		end
 	end
 
