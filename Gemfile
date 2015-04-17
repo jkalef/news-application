@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem "font-awesome-rails"
 gem "paperclip", "~> 4.2"
 
 #add user authentication
@@ -52,6 +53,10 @@ group :development, :test do
   gem "hirb"
   gem "faker"
   gem "quiet_assets"
+
+
+gem "letter_opener", :group => :development
+
 
 end
 

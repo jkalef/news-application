@@ -1,4 +1,5 @@
 class Post < ActiveRecord::Base
+	attr_accessor :tag_string
 
 	#---ASSOCIATIONS----------------------------------------
 	has_many :comments, dependent: :destroy
@@ -8,8 +9,13 @@ class Post < ActiveRecord::Base
 	has_many :favorites, dependent: :destroy
 	has_many :users_who_favorited, through: :favorites, source: :user
 
+	has_many :tagizations, dependent: :nullify
+	has_many :tags, through: :tagizations
 
-	has_attached_file :picture, :styles => { :medium => "350x350>", :thumb => "100x100>" }
+	accepts_nested_attributes_for :tags
+
+
+	has_attached_file :picture, :styles => { :medium => "350x350#>", :thumb => "100x100>" }
 			##url => "/rails_root/public/system/posts/pictures/:id/:style/:basename.:extension"
 	validates_attachment_content_type :picture, :content_type => /\Aimage\/.*\Z/	
 

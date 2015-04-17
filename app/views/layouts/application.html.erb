@@ -1,42 +1,74 @@
 <!DOCTYPE html>
 <html>
 <head>
+
+
   <title>Blog</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-<nav class="navbar navbar-default navbar-fixed-top">
-	<%= link_to "Home", root_path %>  |
-	<%= link_to "About", about_path %>  |
-	<%= link_to "All Posts", posts_path %>  |
-	<%= link_to "Create A New Post", new_post_path %>  |
-	<%= link_to "Contact Us", contact_path %> |
 
-  <%= link_to "View Favorites", favorites_path %>
+     <div id="fb-root"></div>
+        <script>(function(d, s, id) {
+          var js, fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) return;
+          js = d.createElement(s); js.id = id;
+          js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.3";
+          fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>
 
-	<%# display the users name if they are logged in.  If not, display the sign-in link%>
-	<% if user_signed_in? %>
-	<p>Hello <%= current_user.show_name %></p>
-		<%= link_to "Logout", destroy_user_session_path, method: :delete %>
-	<% else %>
-		<%= link_to "Sign In", new_user_session_path %>
-	<% end %>
-</nav>
-<br>
-<hr>
-<%= flash[:notice] || flash[:alert] %>
-<hr>
 
-<%# search for posts with a specific term %>
-<%= form_tag(posts_path, method: "get") do %>
-  	<%= label_tag(:search_word, "Search for:") %>
-  	<%= text_field_tag(:search_word) %>
-  	<%= submit_tag("Search") %>
-<% end %>
+    <!-- Nav Bar -->
+    <nav class="navbar navbar-default my-navbar">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <%= image_tag "toms_logo_trans.png", class: "brand-image" %>
+        </div>
 
-<%= yield %>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li><%= link_to "Home", root_path %></li>
+            <li><%= link_to "About", about_path %></li>
+            <li><%= link_to "Contact Us", contact_path %></li>
+          </ul>
+
+          <!--CHANGE THESE LINKS IF USER IS SIGNED IN / SIGNED UP OR NOT -->
+          <!--replace rails link -->
+          <ul class="nav navbar-nav navbar-right">
+            <!--display this nav bar if the user is signed in -->
+            <% if user_signed_in? %>
+              <li>Hello <%= current_user.show_name %></li>
+              <li><%= link_to "Create A Post", new_post_path, class: "btn btn-success my-btn" %></li>
+              <li><%= link_to "View Favorites", favorites_path, class: "btn btn-primary my-btn" %></li>
+              <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete, class: "btn btn-danger my-btn" %></li>
+            <% else %>
+              <li><%= link_to "Sign In", new_user_session_path, class: "btn btn-success my-btn" %></li>
+              <li><%= link_to "Sign Up", new_user_registration_path, class: "btn btn-primary my-btn" %></li>
+            <% end %>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+
+  
+       <!--FLASH MESSAGES ...part of nav-->
+      <div class="container-fluid">
+        <%= flash[:notice] || flash[:alert] %>
+      </div>
+
+
+  <%= yield %>
+
 
 </body>
 </html>

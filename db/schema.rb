@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150412230325) do
+ActiveRecord::Schema.define(version: 20150413011241) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -77,6 +77,22 @@ ActiveRecord::Schema.define(version: 20150412230325) do
 
   add_index "readings", ["user_id"], name: "index_readings_on_user_id", using: :btree
 
+  create_table "tagizations", force: :cascade do |t|
+    t.integer  "post_id"
+    t.integer  "tag_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "tagizations", ["post_id"], name: "index_tagizations_on_post_id", using: :btree
+  add_index "tagizations", ["tag_id"], name: "index_tagizations_on_tag_id", using: :btree
+
+  create_table "tags", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string   "first_name"
     t.string   "last_name"
@@ -104,4 +120,6 @@ ActiveRecord::Schema.define(version: 20150412230325) do
   add_foreign_key "posts", "readings"
   add_foreign_key "posts", "users"
   add_foreign_key "readings", "users"
+  add_foreign_key "tagizations", "posts"
+  add_foreign_key "tagizations", "tags"
 end

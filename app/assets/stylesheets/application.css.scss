@@ -10,10 +10,12 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
+ 
  *= require_tree .
  *= require_self
  */
 
+@import "font-awesome";
 @import "bootstrap";
 
 /* -- DIV STYLES ----- */
@@ -24,8 +26,46 @@
   padding: 10px;
 }
 
+.post-wrapper {
+  border: 1px solid gray;
+  margin: 10px;
+}
 
+.post-content {
+  text-align: center;
+}
 
+.post-image-container {
+  width: 100%;
+  min-height: 300px;
+  margin: 0;
+  padding: 0;
+}
+
+.post-image {
+  width: 100%;
+  height: 300px;
+}
+
+.article-title-details {
+  text-align: center;
+  font-size: 12px;
+}
+
+.favorite-link {
+  float: right;
+}
+
+.button-area {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.social-share-buttons{
+  text-align: center;
+  margin-top :10px;
+  margin-bottom: 10px;
+}
 
 /*--TYPOGRAPHY ------ */
 
@@ -38,5 +78,154 @@
 .middle {
   margin: 0 auto;
 }
+
+/*main container width*/
+.container {
+  max-width: 1000px;
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+
+/* Navigation Bar */
+.navbar {
+  background: #5a534c;
+  height: 70px;
+  padding-top: 10px;
+}
+
+.navbar.navbar-default {
+  margin-bottom: 0;
+  border-radius: 0;
+  border: none;
+}
+
+.navbar-default .navbar-nav>li>a {
+  color: #ffffff;
+}
+
+.link-item {
+  color: white;
+}
+
+.navbar-default.navbar-nav li {
+  vertical-align: middle;
+}
+
+.brand-image {
+  width: 120px;
+  height: 77px;
+}
+
+.navbar-brand-no-padding {
+  padding: 0px;
+}
+
+/* Hero Area */
+.hero-image-full-width {
+  width: 100%;
+}
+
+.my-btn {
+  border-radius: 5;
+  border: none;
+  margin-left: 10px;
+}
+
+.hero-wrapper {
+  width:100%;
+  height:400px;
+  background-image:url('toms_stories.png');
+  background-size:cover;
+  background-position: center;
+}
+
+#placeholder-area{
+  width: 100%;
+  height: 275px;
+}
+
+.search-bar-div {
+  width: 100%;
+  text-align: center;
+}
+
+.search-bar {
+  width: 60%;
+  margin: 0 auto;
+}
+
+
+/*--SEARCH MENU AREA--*/
+.drop-menu-container {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 600px;
+}
+
+#drop-menus-wrapper {
+  margin: 0 auto;
+}
+
+.drop-down-menu {
+  background-color: gray;
+  height: 50px;
+  margin: 0 auto;
+}
+
+
+
+/*--POST SHOW AREA FOR INDEX PAGE --*/
+
+
+.image-and-header {
+  margin-bottom: 10px;
+  text-align: center;
+  font-size: 20px;
+  overflow: hidden;
+}
+
+.post-image {
+  margin-bottom: 10px;
+  max-height: 250px
+}
+
+.post-snippet-content {
+  text-align: center;
+  font-size: 14px;
+  padding: 5px;
+  line-height: 1.2em;
+}
+
+.post-social-buttons {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.post-buttons {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.post-container {
+  margin: 0 auto;
+}
+
+.post-container {
+  border: 1px solid gray;
+  margin-bottom: 10px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 

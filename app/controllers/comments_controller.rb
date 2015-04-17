@@ -6,8 +6,6 @@ before_action :authenticate_user!
 
 
 #---ACTIONS-----------------------------------------------------
-
-
 	def create
 		@post			= Post.find(params[:post_id])
 		@comment    	= current_user.comments.new(comment_params)
@@ -15,6 +13,8 @@ before_action :authenticate_user!
 		@comment.post 	= @post
 
 		if @comment.save
+			#email post creater if the comment was saved
+			CommentsMailer.notify_post_owner(@comment).deliver
 			redirect_to post_path(@post)
 		else
 			render "posts/show"
@@ -28,8 +28,6 @@ before_action :authenticate_user!
 		@comment.destroy
 		redirect_to post_path(@post), notice: "record deleted"
 	end
-
-
 
 
 #--CLASS METHODS---------------------------------------------------

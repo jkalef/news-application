@@ -11,7 +11,9 @@
 			<br>
 			<p><%= @post.body %></p>
 
-				
+
+			<div class="fb-share-button" data-href="<%= post_url(@post) %>" data-layout="button_count"></div> 
+	
 
 			<%# Add a link to edit your post %>
 			<%= link_to "Edit", edit_post_path(@post) %>

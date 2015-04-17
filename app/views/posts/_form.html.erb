@@ -22,5 +22,14 @@
 		<br>
 		 <%= f.text_area :body, {class: "form-control", rows: 30, placeholder: "Your amazing article here..."} %>
 		<br>
+
+		<%= f.text_field :tag_string %>
+
+			<%# f.collection_check_boxes :tag_ids, Tag.all, :id, :name %>
+			<%= f.fields_for :tags, Tag.new do |t| %>
+							 <%= t.label :name %>
+							 <%= t.text_field :name %>
+			<% end %>
+			<br>
 		<%= f.submit "Submit Blog Post", {class: ".btn-lg btn btn-success"} %> 
 		<% end %>

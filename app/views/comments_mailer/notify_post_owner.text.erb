@@ -1,0 +1,9 @@
+Hello <%= @post.user.show_name %>
+Someone commented on your post...
+
+Post Title: <%= link_to @post.title, post_url(@post) %>
+Comment: <%= @comment.body %>
+
+All the best,
+
+The Stories Blog Team
