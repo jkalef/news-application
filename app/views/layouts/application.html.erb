@@ -58,13 +58,17 @@
           </ul>
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container-fluid -->
-    </nav>
-
-  
+      
        <!--FLASH MESSAGES ...part of nav-->
       <div class="container-fluid">
         <%= flash[:notice] || flash[:alert] %>
       </div>
+      
+    </nav>
+
+
+  
+    
 
 
   <%= yield %>

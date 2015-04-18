@@ -30,6 +30,24 @@ before_action :authenticate_user!
 		@comment = Comment.find(params[:id])
 	end
 
+	def update
+		@post = Post.find(params[:post_id])
+		@comment = Comment.find(params[:id])
+		#comment editable ... write a scope, and change these
+		#to be @comment.editable
+		
+		respond_to do |format|
+			if @comment.update(comment_params)
+				format.html { redirect_to @post, notice: "answer updated!"}
+				format.js { render :update_success }
+			else
+				format.html { render :edit }
+				format.js { render :update_failure }
+			end
+		end
+	end
+
+
 	def destroy
 		@post = Post.find(params[:post_id])
 		@comment = Comment.find(params[:id])

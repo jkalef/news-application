@@ -5,8 +5,47 @@
         <br>
         <%= comment.user %>
         <br>
-      <%#--EDIT COMMENTS ONLY IF THEY WERE MADE 15 MINUTES AGO OR LESS %>
-        <%= link_to "Edit This Comment", edit_post_comment_path(@post, comment), class: "edit-comment-link" %>
+        <%#--EDIT COMMENTS ONLY IF THEY WERE MADE 15 MINUTES AGO OR LESS %>
+        <% if (comment.time_left(comment)).to_i > 0 %>
+
+
+        <!-- //for the edit comment time limit -->
+        <script type="text/javascript">
+          $(document).ready( function() {
+            // var comment = ('<%= comment %>');
+            var editCommentTimeout = function(comment) {
+            <!--   //only have 15 minutes to edit a comment once it's created -->
+              var start = Number($(comment).find('.time-left').html());
+              //console.log(">>>>>>>>>>>>" + start);
+              $(comment).find('.edit-comment-link').append('<p class="timer-container">' + start + "minutes left" + '</p>');
+              <!-- //countdown from 15 minutes, and show time left
+              //after each minute -->
+              var editTimer = setInterval( function() {
+                  if (start === 0) {
+                    clearInterval(editTimer);
+                   <!--  //if the timer hits zero, remove this class so the link
+                    //disapears -->
+                    $(comment).find('.edit-comment-link').remove();
+                  }
+                  else {
+                    start -= 1;
+                    $(comment).find('.timer-container').html(start + " " + "minutes left");
+                  }
+              }, 60000);
+            //close main function
+            
+            };
+
+            editCommentTimeout('#<%= dom_id(comment) %>');
+
+          });
+
+        </script>
+
+
+            <%= link_to "Edit This Comment", edit_post_comment_path(@post, comment), remote: true, data: {toggle: "modal", target: "#myModal"}, class: "edit-comment-link" %>
+            <p>time left to edit post: <span class="time-left"><%= comment.time_left(comment) %></span></p>
+        <% end %>
         <br>
         <%= button_to "Delete Comment", post_comment_path(@post, comment), method: :delete, remote: true, data: {confirm: "are you sure you want to delete this comment?"} %>
         <hr>

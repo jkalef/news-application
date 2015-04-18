@@ -12,8 +12,17 @@
  *
  
  *= require_tree .
+ *= require 'masonry/basic'
+  *= require 'masonry/centered'
+  *= require 'masonry/fluid'
+  *= require 'masonry/gutters'
+  *= require 'masonry/infinitescroll'
+  *= require 'masonry/right-to-left'
+  *= require 'masonry/transitions'
  *= require_self
  */
+
+
 
 @import "font-awesome";
 @import "bootstrap";
@@ -185,16 +194,20 @@
   overflow: hidden;
 }
 
+
+
 .post-image {
   margin-bottom: 10px;
   max-height: 250px
 }
 
+
 .post-snippet-content {
   text-align: center;
   font-size: 14px;
   padding: 5px;
-  line-height: 1.2em;
+  line-height: 1.5em;
+  overflow: hidden;
 }
 
 .post-social-buttons {

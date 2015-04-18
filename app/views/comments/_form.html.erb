@@ -6,8 +6,8 @@
         <% end %>
       <% end %>
 
-
-      <%= form_for @comment, url: post_comments_path(@post), remote: true do |f| %>
+      <%# this form will work for both the GET and the PATCH %>
+      <%= form_for [@post, @comment], remote: true do |f| %>
         <%= f.text_area :body, placeholder: "Your Comment Goes Here" %>
         <br>
         <%= f.submit "Submit Comment" %>

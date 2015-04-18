@@ -1,0 +1,12 @@
+<%#need to set the DOM ID so I can select this specific post %>
+<div id="<%= dom_id(post) %>">
+  <%# partial for the links %>
+  <%= link_to "Read More", post_path(post), class: "btn btn-success"%>
+  <%# this variable can go in the controller ------------------------ %>
+  <% favorite = post.favorites.find_by_user_id(current_user.id) if user_signed_in? %>
+  <% if favorite %> 
+      <%= link_to "Remove From Favorites", [post, favorite], method: :delete, remote: true, class: "btn btn-primary" %>
+  <% else %>
+      <%= link_to "Read Later", post_favorites_path(post), method: :post, remote: true, class: "btn btn-primary" %>
+  <% end %>   
+</div>

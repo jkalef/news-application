@@ -57,6 +57,7 @@ group :development, :test do
 gem 'delayed_job_active_record'
 gem "delayed_job_web"
 gem "letter_opener", :group => :development
+gem 'masonry-rails'
 
 
 end

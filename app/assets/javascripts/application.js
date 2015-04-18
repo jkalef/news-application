@@ -12,31 +12,20 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require bootstrap
 //= require turbolinks
+//= require masonry/jquery.masonry
+//= require masonry/jquery.event-drag
+//= require masonry/jquery.imagesloaded.min
+//= require masonry/jquery.infinitescroll.min
+//= require masonry/modernizr-transitions
 //= require_tree .
 
 $(document).ready(function() {
 
-    //for the edit comment time limit
-    var commentEditTimeout = function() {
-      //only have 15 minutes to edit a comment once it's created
-      var start = 15;
-      $('.edit-comment-link').append('<p class="timer-container">start + "minutes" + "left"</p>');
-      //countdown from 15 minutes, and show time left
-      //after each minute
-      var editTimer = setInterval(function() {
-          if (start === 0) {
-            clearInterval(editTimer);
-            //if the timer hits zero, remove this class so the link
-            //disapears
-            $('.edit-comment-link').remove();
-          }
-          else {
-            start -= 1;
-            $('.timer-container').html(start + " " + "minutes left");
-          }
-      }, 1000);
 
-    };
+    /* MODAL ---------------------------------------------------------------------- */
+    $('#mymodal').modal("toggle");
+
 //close document.ready
-})
+});
