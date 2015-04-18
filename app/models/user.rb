@@ -10,11 +10,13 @@ class User < ActiveRecord::Base
   has_many :favorites, dependent: :destroy
   has_many :favorite_posts, through: :favorites, source: :post
 
+  has_many :interests, dependent: :destroy
+  has_many :tags, through: :interests, source: :tag
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
-
 
 
  #--CLASS METHODS-------------------------------------------

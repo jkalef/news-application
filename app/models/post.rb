@@ -12,6 +12,7 @@ class Post < ActiveRecord::Base
 	has_many :tagizations, dependent: :nullify
 	has_many :tags, through: :tagizations
 
+	#allow to create tags on the same form as creating a post
 	accepts_nested_attributes_for :tags
 
 

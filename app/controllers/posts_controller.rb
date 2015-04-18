@@ -128,7 +128,7 @@ before_action :find_post, only: [:show, :edit, :update, :destroy]
     tags = []
     split_tags = post_params[:tag_string].split(",")
     split_tags.each do |tag_name|
-      tag = Tag.new(name: tag_name)
+      tag = Tag.find_by_name_or_new(tag_name)
       tag.save
       tags << tag
     end
