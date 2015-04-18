@@ -20,7 +20,7 @@ Rails.application.routes.draw do
 	resources :posts do
 		resources :comments
 		resources :favorites, only: [:create, :update, :destroy]
-		resources :tags, only: [:create]
+		resources :tags, only: [:create, :show]
 	end
 
 	#this will list the posts only created by that user

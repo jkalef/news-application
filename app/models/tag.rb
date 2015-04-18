@@ -10,9 +10,9 @@ class Tag < ActiveRecord::Base
 
 
     #--CLASS METHODS---------------------------------
-    #I want to accept a string from the user, and convert that
-    #string into a bunch of new tags....should I do this here or
-    #in the controller???
+    #only display unique tags when sorting by tags
+    def self.unique_tags
+        Tag.select(:name).distinct
+    end
     
-
 end

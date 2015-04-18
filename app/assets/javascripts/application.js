@@ -26,5 +26,8 @@ $(document).ready(function() {
     /* MODAL ---------------------------------------------------------------------- */
     $('#mymodal').modal("toggle");
 
+    /* FOR THE DROPDOWN MENUS ------------------------------------------------------- */
+    $('.dropdown-toggle').dropdown()
+
 //close document.ready
 });

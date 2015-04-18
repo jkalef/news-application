@@ -27,23 +27,53 @@
         </div>
     </div>
 
-<!--Navigation for Index Page Only -->
-    <!--REPLACE WITH RAILS SELECTOR BOXES & JQUERY STYLES -->
+    <!--Navigation for Index Page Only -->
     <div class="container drop-menu-container">
+        
         <div class="col-md-4 col-xs-12">
-            <!--replace with Rails Select Drop-Down -->
-            <div class="drop-down-menu"></div>
-        </div> 
-
+          <div class="dropdown">  
+                  <button type="button" class="btn btn-default dropdown-toggle button-full" data-toggle="dropdown"> 
+                    Topics <span class="caret"></span></button>
+                      <ul class="dropdown-menu scrollable-menu" role="menu" aria-labelledby="dLabel">
+                        <% @tags.each do |tag| %>
+                          <li>
+                            <%= link_to tag.name, "" %>
+                          </li>
+                        <% end %>
+                      </ul>
+                </div>
+          </div>
+       
         <div class="col-md-4 col-xs-12">
-            <!--replace with Rails Select Drop-Down -->
-            <div class="drop-down-menu"></div>
-        </div> 
+          <div class="dropdown">
+                  <button type="button" class="btn btn-default dropdown-toggle button-full" data-toggle="dropdown"> 
+                    Authors <span class="caret"></span></button>
+                      <ul class="dropdown-menu scrollable-menu" role="menu" aria-labelledby="dLabel">
+                        <% @users.each do |user| %>
+                          <li>
+                            <%= link_to "#{user.show_name} (#{user.posts.count})" %>
+                          </li>
+                        <% end %>
+                      </ul>
+                </div>
+          </div>
 
-        		<div class="col-md-4 col-xs-12">
-            <!--replace with Rails Select Drop-Down -->
-            		<div class="drop-down-menu"></div>
-       </div>
+          <div class="col-md-4 col-xs-12">
+            <div class="dropdown">
+                  <button type="button" class="btn btn-default dropdown-toggle button-full" data-toggle="dropdown"> 
+                    Featured Posts <span class="caret"></span></button>
+                      <ul class="dropdown-menu scrollable-menu" role="menu" aria-labelledby="dLabel">
+                        <% @featured_posts.each do |feature| %>
+                          <li>
+                            <%# only show a snippet of the title %>
+                            <%= link_to truncate(feature.title, length: 30) %>
+                          </li>
+                        <% end %>
+                      </ul>
+                </div>
+          </div>
+        
+
     </div>
 
 

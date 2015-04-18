@@ -1,6 +1,37 @@
-<h1>View Your Favorites</h1>
+<!--DISPLAY THE POSTS -->
+<div class="container">
+    <%# if you don't have any favorites..... %>
+    <% if @favorites.empty? %>
+      <h1>You have no favorite stories....check out the stories at <%=link_to "Story Page", root_path %></h1>
+    <% end %>
+    <% else %>
+    <h1>Your Favorite Stories</h1>
+    <% @favorites.each do |favorite| %>
+      <div class="col-md-6 col-xs-12">
+        <div class="post-container">
+            <!--contains the picture and title text -->
+            <div class="image-and-header">
+                <%= image_tag favorite.picture.url(:medium), class: "post-image" %>
+                <!--Title should be a link to the post -->
+                <h2 class="title-link-to-post"><%= link_to favorite.title, favorite %></h2>
+                <p class="article-title-details">By: <%= link_to favorite.user.show_name %>, <%= link_to favorite.created_at %></p>
+            </div>
+            <div class="snippet-content">
+                <p class="post-snippet-content"><%= truncate(favorite.body, length: 600) %></p>
+            </div>
+            <div class="button-area">
+                <%= link_to "Read More", post_path(favorite), class: "btn btn-success"%>
+                <%# render partial: "/favorites/favorite", locals: {favorite: favorite} %>
+            </div>
 
-<% @favorites.each do |fav| %>
-  <%= fav.title %>
-  <br>
-<% end %>
+                <div class="social-share-buttons">
+                  <i class="fa fa-facebook-official fa-2x"></i>
+                  <i class="fa fa-twitter-square fa-2x"></i>
+                  <i class="fa fa-pinterest-square fa-2x"></i>
+                  <i class="fa fa-tumblr-square fa-2x"></i>
+                </div>                    
+          </div>
+        </div>
+      <% end %>
+  <!--close the main container -->
+  </div>

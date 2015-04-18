@@ -28,9 +28,16 @@ before_action :find_post, only: [:show, :edit, :update, :destroy]
                                         but here's a random post anyways!"
             end
     else
-    #default view of no search query is made
+    #default view of no search query is made..view the latest posts
     @posts = Post.latest
+    #--end IF statement for search
     end
+
+    #--FOR THE SEARCH MENUS---------------------------------------
+    @tags = Tag.unique_tags
+    @users = User.all
+    @featured_posts = Post.featured_posts
+
   #-close index action
   end
 

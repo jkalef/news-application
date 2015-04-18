@@ -36,6 +36,13 @@ class Post < ActiveRecord::Base
 		Post.order("created_at DESC")
 	end
 
+	#for the menu to display featured posts (will just display them randomly)
+	def self.featured_posts
+		#use the RANDOM() method from postgres
+		Post.order("RANDOM()").limit 10
+	end
+
+
 	#search for a specific keyword in the posts
 	def self.search(search_term)
 		Post.where("title ILIKE ? OR body ILIKE ?", "%#{search_term}%", "%#{search_term}%")

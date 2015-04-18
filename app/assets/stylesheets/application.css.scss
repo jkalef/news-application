@@ -182,6 +182,17 @@
   margin: 0 auto;
 }
 
+.scrollable-menu {
+    height: auto;
+    max-height: 150px;
+    overflow-x: hidden;
+}
+
+
+.button-full {
+  width: 100%;
+}
+
 
 
 /*--POST SHOW AREA FOR INDEX PAGE --*/
