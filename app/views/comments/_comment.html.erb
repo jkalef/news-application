@@ -42,11 +42,14 @@
 
         </script>
 
-
             <%= link_to "Edit This Comment", edit_post_comment_path(@post, comment), remote: true, data: {toggle: "modal", target: "#myModal"}, class: "edit-comment-link" %>
-            <p>time left to edit post: <span class="time-left"><%= comment.time_left(comment) %></span></p>
+                <p>time left to edit post: <span class="time-left"><%= comment.time_left(comment) %></span></p>
         <% end %>
+
+  
         <br>
-        <%= button_to "Delete Comment", post_comment_path(@post, comment), method: :delete, remote: true, data: {confirm: "are you sure you want to delete this comment?"} %>
+
+          <%= button_to "Delete Comment", post_comment_path(@post, comment), method: :delete, remote: true, data: {confirm: "are you sure you want to delete this comment?"} %>
+
         <hr>
 </div>

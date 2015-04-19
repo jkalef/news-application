@@ -4,7 +4,6 @@ class User < ActiveRecord::Base
   #one to many
   has_many :posts, dependent: :nullify
   has_many :comments, dependent: :nullify
-  has_many :readings, dependent: :destroy
 
   #many to many
   has_many :favorites, dependent: :destroy
@@ -17,6 +16,9 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+
+
+  #after_initialize scope: set_defaults{ }
 
 
  #--CLASS METHODS-------------------------------------------

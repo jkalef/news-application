@@ -58,6 +58,7 @@ gem 'delayed_job_active_record'
 gem "delayed_job_web"
 gem "letter_opener", :group => :development
 gem 'masonry-rails'
+gem 'cancancan', '~> 1.10'
 
 
 end

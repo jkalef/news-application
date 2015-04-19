@@ -8,10 +8,9 @@ before_action :authenticate_user!
 #---ACTIONS-----------------------------------------------------
 	def create
 		@post			= Post.find(params[:post_id])
-		@comment    	= current_user.comments.new(comment_params)
+		@comment  = current_user.comments.new(comment_params)
 		#this associates the comment to the specific post_id
 		@comment.post 	= @post
-
 		respond_to do |format|
 				if @comment.save
 					#email post creater if the comment was saved
@@ -28,6 +27,7 @@ before_action :authenticate_user!
 	def edit
 		@post = Post.find(params[:post_id])
 		@comment = Comment.find(params[:id])
+		redirect_to root_path alert: "access denied" unless can? :manage, @comment
 	end
 
 	def update
@@ -51,6 +51,7 @@ before_action :authenticate_user!
 	def destroy
 		@post = Post.find(params[:post_id])
 		@comment = Comment.find(params[:id])
+		redirect_to root_path alert: "access denied" unless can? :manage, @comment
 
 
 			@comment.destroy		
@@ -68,6 +69,5 @@ before_action :authenticate_user!
 		#strong params
 		comment_params = params.require(:comment).permit(:body)
 	end
-
 
 end

@@ -5,7 +5,7 @@ class PostsController < ApplicationController
 before_action :authenticate_user!, except: [:index, :show]
 
 #from the private methods below
-before_action :find_post, only: [:show, :edit, :update, :destroy]
+before_action :find_post, only: [:edit, :update, :destroy]
 
 
 #--ACTIONS----------------------------------------------------------
@@ -34,7 +34,7 @@ before_action :find_post, only: [:show, :edit, :update, :destroy]
     end
 
     #--FOR THE SEARCH MENUS---------------------------------------
-    @tags = Tag.unique_tags
+    @tags = Tag.all
     @users = User.all
     @featured_posts = Post.featured_posts
 
@@ -68,6 +68,9 @@ before_action :find_post, only: [:show, :edit, :update, :destroy]
   # GET
   # URL /posts/:id
   def show
+    #need to find the post to display
+    #not included in before_action due to user permissions
+    @post = Post.find(params[:id])
     #instantiate a new comment
     @comment = Comment.new
     #use this to display all of the comments, sorted by most recent
@@ -121,9 +124,11 @@ before_action :find_post, only: [:show, :edit, :update, :destroy]
   def find_post
     #method to find a post by its id
     @post = Post.find(params[:id])
+    #if the user is not an admin, they can't access the edit, destroy or update actions
+    redirect_to root_path alert: "access denied" unless can? :manage, @post
   end
 
-
+  #split tags entered by the user by commas
   def split_the_tags
     tags = []
     split_tags = post_params[:tag_string].split(",")
@@ -137,12 +142,6 @@ before_action :find_post, only: [:show, :edit, :update, :destroy]
 
 end
 
-
-#--RANDOM NOTES--------------------------------
-#use this format to make an edit form on the same page,
-#as opposed to having to change the page
-# <div class="edit-form">--make hidden
-# add the form_for
 
 
 

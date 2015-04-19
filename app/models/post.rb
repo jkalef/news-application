@@ -4,7 +4,6 @@ class Post < ActiveRecord::Base
 	#---ASSOCIATIONS----------------------------------------
 	has_many :comments, dependent: :destroy
 	belongs_to :user
-	belongs_to :reading
 
 	has_many :favorites, dependent: :destroy
 	has_many :users_who_favorited, through: :favorites, source: :user

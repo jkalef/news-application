@@ -23,6 +23,10 @@ Rails.application.routes.draw do
 		resources :tags, only: [:create, :show]
 	end
 
+	namespace :admin do
+		resources :users
+	end
+
 	#this will list the posts only created by that user
 	get "/posts/:user_id" => "posts#your_posts", as: :your_posts
 

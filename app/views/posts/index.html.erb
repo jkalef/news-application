@@ -37,7 +37,7 @@
                       <ul class="dropdown-menu scrollable-menu" role="menu" aria-labelledby="dLabel">
                         <% @tags.each do |tag| %>
                           <li>
-                            <%= link_to tag.name, "" %>
+                            <%= link_to "#{tag.name} (#{tag.posts.count})", "" %>
                           </li>
                         <% end %>
                       </ul>
