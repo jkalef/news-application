@@ -1,0 +1,11 @@
+<!-- DISPLAY THE MENUS -->
+<%= render partial: "/layouts/menus", locals: {tags: @tags, user: @users, featured_posts: @featured_posts}  %>
+
+<div class="container">
+  <h1>Posts relating to <%= @tag.name %></h1>
+</div>
+
+<!-- show posts relating to this tag -->
+<%= render partial: "/tags/tag" %>
+
+

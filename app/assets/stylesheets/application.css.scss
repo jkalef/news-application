@@ -13,12 +13,12 @@
  
  *= require_tree .
  *= require 'masonry/basic'
-  *= require 'masonry/centered'
-  *= require 'masonry/fluid'
-  *= require 'masonry/gutters'
-  *= require 'masonry/infinitescroll'
-  *= require 'masonry/right-to-left'
-  *= require 'masonry/transitions'
+ *= require 'masonry/centered'
+ *= require 'masonry/fluid'
+ *= require 'masonry/gutters'
+ *= require 'masonry/infinitescroll'
+ *= require 'masonry/right-to-left'
+ *= require 'masonry/transitions'
  *= require_self
  */
 
@@ -238,6 +238,49 @@
 .post-container {
   border: 1px solid gray;
   margin-bottom: 10px;
+}
+
+
+button { font-size: 18px; } 
+
+/* MASONRY STYLES */
+
+
+#posts-to-test {
+  margin: 0 auto;
+  width: 100%;
+  .box {
+    margin: 10px;
+    width: 350px;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.22);
+    border-radius: 7px;
+    text-align: center;
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+    h2 {
+      font-size: 22px;
+      margin: 0;
+      padding: 25px 10px;
+      a {
+        color: #474747;
+      }
+    }
+    .user-detail {
+      font-size: 12px;
+      border-top: 1px solid #EAEAEA;
+      padding: 15px;
+      margin: 0;
+    }
+  }
+}
+
+
+.view-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-top: 50px;
 }
 
 

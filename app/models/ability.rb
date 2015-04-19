@@ -19,9 +19,10 @@ class Ability
       end
 
       #you can delete and edit your own comment
-      # can :manage, Comment do |comment|
-      #   comment.user == user
-      # end
+      can :manage, Comment do |comment|
+        comment.user == user
+      end
+
 
     #
     # The first argument to `can` is the action you are giving the user

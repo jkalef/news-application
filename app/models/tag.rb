@@ -17,7 +17,7 @@ class Tag < ActiveRecord::Base
     def self.unique_tags
         Tag.select(:name, :id).distinct(:name)
     end
-
+    
 
     def self.find_by_name_or_new(name)
         t = Tag.find_by_name(name)

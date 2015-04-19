@@ -15,7 +15,7 @@ class Post < ActiveRecord::Base
 	accepts_nested_attributes_for :tags
 
 
-	has_attached_file :picture, :styles => { :medium => "350x350#>", :thumb => "100x100>" }
+	has_attached_file :picture, :styles => { :medium => "350x350>" }
 			##url => "/rails_root/public/system/posts/pictures/:id/:style/:basename.:extension"
 	validates_attachment_content_type :picture, :content_type => /\Aimage\/.*\Z/	
 

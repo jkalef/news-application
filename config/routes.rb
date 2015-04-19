@@ -9,14 +9,7 @@ Rails.application.routes.draw do
 	get "/contact" => "home#contact", as: :contact
 
 
-	#POSTS & COMMENT ROUTES ----------------------------------------
-	# get '/posts' => "posts#index"
-	# get '/posts/new' => "posts#new", as: :new_post
-	# post '/posts/' => "posts#create"
-	# get '/posts/:id' => "posts#show", as: :post
-	# get '/posts/:id/edit' => "posts#edit", as: :edit_post
-	# patch '/posts/:id' => 'posts#update'
-	# delete '/posts/:id' => 'posts#destroy'
+	#POSTS, COMMENT & TAGS ROUTES ----------------------------------------
 	resources :posts do
 		resources :comments
 		resources :favorites, only: [:create, :update, :destroy]
@@ -33,6 +26,13 @@ Rails.application.routes.draw do
 	#from delayed_job_web GEM-----------------------------------------
 	match "/delayed_job" => DelayedJobWeb, :anchor => false, via: [:get, :post]
 
+	#use this route to display your favorites
+	#defined current_user favorites in the favorites controller
 	resources :favorites, only: [:index]
+
+	#use this route to display posts relating to tags
+	resources :tags, only: [:show], as: :tag
+
+
 
 end

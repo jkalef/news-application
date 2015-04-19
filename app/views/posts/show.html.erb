@@ -34,8 +34,7 @@
 			</div>
 
 
-			<%# Add a link to edit your post %>
-			
+			<%# Add a link to edit the post. Only admins or people who wrote the posts can edit them %>
 			<% if can? :edit, @post %>
 					<%= link_to "Edit", edit_post_path(@post) %>
 			<% end %>
@@ -47,11 +46,14 @@
 			<br>
 			<br>
 
+			<%# only loged in users can add comments %>
 			<%#--Refer to the 'comment form' partial to create a new comment %>
+			<% if user_signed_in? %>
 			<div class="comment-form">
 				<h2>Add A Comment</h2>
 				<%= render partial: "/comments/form" %>
 			</div>
+			<% end %>
 
 			<br>
 

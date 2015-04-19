@@ -1,37 +1,32 @@
-<!--DISPLAY THE POSTS -->
-<div class="container">
-    <%# if you don't have any favorites..... %>
-    <% if @favorites.empty? %>
-      <h1>You have no favorite stories....check out the stories at <%=link_to "Story Page", root_path %></h1>
-    <% end %>
-    <% else %>
-    <h1>Your Favorite Stories</h1>
-    <% @favorites.each do |favorite| %>
-      <div class="col-md-6 col-xs-12">
-        <div class="post-container">
-            <!--contains the picture and title text -->
-            <div class="image-and-header">
-                <%= image_tag favorite.picture.url(:medium), class: "post-image" %>
-                <!--Title should be a link to the post -->
-                <h2 class="title-link-to-post"><%= link_to favorite.title, favorite %></h2>
-                <p class="article-title-details">By: <%= link_to favorite.user.show_name %>, <%= link_to favorite.created_at %></p>
-            </div>
-            <div class="snippet-content">
-                <p class="post-snippet-content"><%= truncate(favorite.body, length: 600) %></p>
+<div class="view-container">
+<div id="posts-to-test" class="transitions-enabled">
+  <% @favorites.each do |fav| %>
+    <div class="box panel panel-default">
+       <%= link_to (image_tag fav.picture.url), fav %>
+       <h2><%= link_to fav.title, fav %></h2>
+       <p class="user"><%= fav.user.show_name %></p>
+        <div class="snippet-content">
+            <% if fav.id % 2 == 0 && fav.id % 3 == 0 %>
+                <p class="post-snippet-content"><%= truncate(fav.body, length: (900)) %></p>
+            <% elsif fav.id % 2 == 0 %>
+                <p class="post-snippet-content"><%= truncate(fav.body, length: (200)) %></p>
+            <% elsif fav.id % 3 == 0 %>
+              <p class="post-snippet-content"><%= truncate(fav.body, length: (500)) %></p>
+            <% else %>
+                 <p class="post-snippet-content"><%= truncate(fav.body, length: (100)) %></p>
+            <% end %>
             </div>
             <div class="button-area">
-                <%= link_to "Read More", post_path(favorite), class: "btn btn-success"%>
+                <%= link_to "Read More", post_path(fav), class: "btn btn-success"%>
                 <%# render partial: "/favorites/favorite", locals: {favorite: favorite} %>
             </div>
-
-                <div class="social-share-buttons">
+            <div class="social-share-buttons">
                   <i class="fa fa-facebook-official fa-2x"></i>
                   <i class="fa fa-twitter-square fa-2x"></i>
                   <i class="fa fa-pinterest-square fa-2x"></i>
                   <i class="fa fa-tumblr-square fa-2x"></i>
-                </div>                    
-          </div>
-        </div>
-      <% end %>
-  <!--close the main container -->
-  </div>
+            </div>       
+    </div>
+    <% end %>
+</div>
+</div>
