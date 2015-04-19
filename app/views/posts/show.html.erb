@@ -1,23 +1,59 @@
 <div class="container">
-	<div class="col-md-9">
-
+	<div class="col-md-10 col-md-offset-1 centered col-sm-12 col-xs-12">
+		<div id="show-posts">
 			<%# display the post using instance variable from the posts_controller %>
-			<h3><%= @post.title %></h3>
-				<% if user_signed_in? %>
-					<%= @post.user %>
+			<h2><%= @post.title %></h2>
+			<p class="post-details">Author: <%= @post.user.show_name %> <br>
+				Topics: <% @post.tags.each do |tag| %>
+									<%= link_to tag.name, tag_path(tag) %>
 				<% end %>
+				<br>
+				Date Published: <%= @post.created_at %>
+				<br>
+				 <%= social_share_button_tag(@post.title) %>
+			</p>
 			<br>
 			<%= image_tag @post.picture.url(:medium) %>
 			<br>
-			<p><%= @post.body %></p>
+			<br>
+			<p class="post-body"><%= @post.body %></p>
+			<br>
+		</div>
 
 
-			<div class="fb-share-button" data-href="<%= post_url(@post) %>" data-layout="button_count"></div> 
+			<%# Add a link to edit the post. Only admins or people who wrote the posts can edit them %>
+			<div id="action-button-area">
+				<% if can? :edit, @post %>
+						<div class="action-button"><%= link_to "Edit This Post", edit_post_path(@post), class: "btn btn-primary" %></div>
+				<% end %>
+
+				<% if can? :destroy, @post %>
+					<div class="action-button"><%= button_to "Delete This Post", post_path(@post), method: :delete, data: {confirm: "Are you sure you want to delete?"}, class: "btn btn-danger" %></div>
+				<% end %>
+			</div>
+			<hr>
+			<br>
+
+
+		<!-- SHOW POSTS RELATED TO THIS ONE -->
+		<div class="related-posts">
+			<h3>Related Posts:</h3>
+			<% @post.tags.each do |tag| %>
+				<%# only display this if the post is different %>
+						<% tag.posts.each do |post| %>
+								<% if post.title != @post.title %>
+										<%= link_to post.title, post %>
+										<br>
+								<% end %>
+						<% end %>
+				<% end %>		
+				<br>
+		</div>
 	
 
-			<%#---MODAL FOR EDITING A QUESITON -------------------------------------------- %>
-			
 
+
+			<%#---MODAL FOR EDITING A COMMENT -------------------------------------------- %>
 			<!-- Modal -->
 			<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 			  <div class="modal-dialog">
@@ -33,38 +69,41 @@
 			  </div>
 			</div>
 
-
-			<%# Add a link to edit the post. Only admins or people who wrote the posts can edit them %>
-			<% if can? :edit, @post %>
-					<%= link_to "Edit", edit_post_path(@post) %>
-			<% end %>
-
-			<% if can? :destroy, @post %>
-				<%= button_to "Delete", post_path(@post), method: :delete, data: {confirm: 
-														"Are you sure you want to delete?"} %>
-			<% end %>
-			<br>
 			<br>
 
 			<%# only loged in users can add comments %>
 			<%#--Refer to the 'comment form' partial to create a new comment %>
-			<% if user_signed_in? %>
-			<div class="comment-form">
-				<h2>Add A Comment</h2>
-				<%= render partial: "/comments/form" %>
-			</div>
-			<% end %>
+				<div id="comment-area">
+					<% if user_signed_in? %>
+					<div class="comment-form">
+						<h3>Submit A Comment</h3>
+						<%= render partial: "/comments/form" %>
+					</div>
+					<% end %>
+				<br>
 
-			<br>
-
-			<%#--Refer to comment partial to display all the comments %>
-			<h2>View Comments</h2>
-			<div class="comments">
-				<% @comments.each do |comment| %>
-					<%= render partial: "/comments/comment", locals: {comment: comment} %>
+				<%#--Refer to comment partial to display all the comments %>
+				<% if user_signed_in? %>
+				<br>
+				<h3>Comments</h3>
+				<hr>
+				<%#-IMPORTANT!!!  For The JS Function -- %>
+				<div class="comments">
+					<% @comments.each do |comment| %>
+						<%= render partial: "/comments/comment", locals: {comment: comment} %>
+					<% end %>
+				</div>
 				<% end %>
-			</div>
-			
 
+				<%#-CLOSE COMMENT AREA %>
+				</div>
+			
+			<%#--CLOSE MID-9 COL %>
 			</div>
+
+
+
+			
+ 
+<%#- CLOSE MAIN CONTAINER --------- %>
 </div>

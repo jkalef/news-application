@@ -7,17 +7,24 @@ class Admin::UsersController < Admin::BaseController
 
   def update
     @user = User.find(params[:id])
-    if @user.update(user_params)
-      redirect_to admin_users_path, notice: "User Updated"
-    else 
-      redirect_to admin_users_path, alert: "User Not Updated"
+    respond_to do |format|
+      if @user.update(user_params)
+        format.html { redirect_to admin_users_path, notice: "User Updated" }
+        format.js { render :update_success }
+      else 
+        format.html { redirect_to admin_users_path, alert: "User Not Updated" }
+        format.js { render :update_failure }
+      end
     end
   end
 
   def destroy
     @user = User.find(params[:id])
     @user.destroy
-    redirect_to admin_users_path, notice:"User Deleted"
+    respond_to do |format|
+      format.html { redirect_to admin_users_path, notice:"User Deleted" }
+      format.js { render }
+    end
   end
 
   private

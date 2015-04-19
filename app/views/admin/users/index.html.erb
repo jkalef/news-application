@@ -1,5 +1,3 @@
-
-
 <div class="container">
   <h1>Welcome <%= current_user.show_name %></h1>
   <table class="table">
@@ -9,21 +7,17 @@
       <th>User Status</th>
       <th>Delete User</th>
     </td>
+    <% @users.each do |user| %>
     <tr>
-      <% @users.each do |user| %>
         <td><%= user.show_name %></td>
         <td><%= user.email %></td>
         <%# --- buttons for changing user permissions --- %>
         <td>
-          <% if user.is_admin? %>
-            <%= link_to "Make Normal User", admin_user_path(user, user: {is_admin: :false}), method: :patch, class: "btn btn-primary" %>
-          <% else %>
-            <%= link_to "Make Admin", admin_user_path(user, user: {is_admin: :true}), method: :patch, class: "btn btn-success" %>  
-          <% end %>
+          <%= render partial: "/admin/users/change", locals: {user: user} %>
         </td>
         <%# --- buttons for deleting users --- %>
         <td>
-          <%= link_to "Delete User", admin_user_path(user), method: :delete, class: "btn btn-danger", data: {confirm: "Are you sure you want to delete this user?"} %>
+          <%= render partial: "/admin/users/delete", locals: {user: user} %>
         </td>
     </tr>
       <% end %>

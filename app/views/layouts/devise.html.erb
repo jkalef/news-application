@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-
-  <title>Blog</title>
+  <title></title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
@@ -37,7 +36,7 @@
           <ul class="nav navbar-nav navbar-right">
             <!--display this nav bar if the user is signed in -->
             <% if user_signed_in? %>
-              <li class="welcome-text"><em>Welcome Back: <%= current_user.show_name %></em></li>
+              <li>Hello <%= current_user.show_name %></li>
               <li><%= link_to "Create A Post", new_post_path, class: "btn btn-success my-btn" %></li>
               <li><%= link_to "View Favorites", favorites_path, class: "btn btn-primary my-btn" %></li>
               <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete, class: "btn btn-danger my-btn" %></li>
@@ -50,52 +49,8 @@
       </div><!-- /.container-fluid -->
     </nav>
 
+<%= yield %>
 
-    <!--Hero -->
-    <!--replace with rails search form -->
-    <div class="hero-wrapper">
-        <div class="container">
-            <!--make sure the search bar goes in the right place, so add this placeholder -->
-            <!--add this as real text eventually using JUMBOTRON from Bootstrap -->
-            <div id="placeholder-area">
-            </div>
-                <div class="search-bar-div">
-                    <!--for the search bar itself to make it shorter -->
-                    <div class="search-bar">
-                          <!-- start of the form -->
-                          <%= form_tag(posts_path, method: "get") do %>
-                          <div class="form-group">      
-                              <%= text_field_tag(:search_word, "", class: "form-control") %>
-                          </div>
-                          <div class="search-buttons">
-                              <!--Query to find posts with title or body like your search -->
-                              <%= submit_tag "Search", class: "btn btn-default" %>
-                              <%= submit_tag "I'm Feeling Lucky", class: "btn btn-default" %>
-                              <% end %>
-                      
-                          </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-      
-       <!--FLASH MESSAGES ...part of nav-->
-      <div class="container">
-        <% if flash[:notice] %>
-          <div class="alert alert-success">
-            <%= flash[:notice] %>
-          </div>
-        <% elsif flash[:alert] %>
-          <div class="alert alert-danger">
-            <%= flash[:alert] %>
-          </div>
-        <% end %>
-      </div>
-
-  <%= yield %>
 
 
 </body>

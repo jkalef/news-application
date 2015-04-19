@@ -42,7 +42,6 @@ class Post < ActiveRecord::Base
 		Post.order("RANDOM()").limit 10
 	end
 
-
 	#search for a specific keyword in the posts
 	def self.search(search_term)
 		Post.where("title ILIKE ? OR body ILIKE ?", "%#{search_term}%", "%#{search_term}%")

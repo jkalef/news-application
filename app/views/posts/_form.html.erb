@@ -5,7 +5,7 @@
 	<%#add an area to display any errors the come up 
 	when trying to create a post %>
 	<% @post.errors.full_messages.each do |message| %>
-		<%= message %>
+		<span class="error-message"><%= message %></span>
 		<br>
 	<% end %>
 		
@@ -18,18 +18,17 @@
 	<%= form_for @post do |f| %>
 		<%= f.text_field :title, {class: "form-control", placeholder: "Your super-catchy article title here..." } %>
 		<br>
+		<%= f.label :picture %>
 		<%= f.file_field :picture %>
 		<br>
 		 <%= f.text_area :body, {class: "form-control", rows: 30, placeholder: "Your amazing article here..."} %>
 		<br>
 
-		<%= f.text_field :tag_string %>
+		<p>Tags (please seperate each tag with a comma):
+		<%= f.text_field :tag_string, class: "form-control" %></p>
 
 			<%# f.collection_check_boxes :tag_ids, Tag.all, :id, :name %>
-			<%= f.fields_for :tags, Tag.new do |t| %>
-							 <%= t.label :name %>
-							 <%= t.text_field :name %>
-			<% end %>
+	
 			<br>
 		<%= f.submit "Submit Blog Post", {class: ".btn-lg btn btn-success"} %> 
 		<% end %>

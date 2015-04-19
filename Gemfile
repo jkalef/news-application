@@ -59,6 +59,7 @@ gem "delayed_job_web"
 gem "letter_opener", :group => :development
 gem 'masonry-rails'
 gem 'cancancan', '~> 1.10'
+gem 'social-share-button'
 
 
 end

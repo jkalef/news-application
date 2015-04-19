@@ -1,3 +1,8 @@
+<%# navigation menu -------- %>
+<%= render partial: "/layouts/menus", locals: {tags: @tags, user: @users, featured_posts: @featured_posts}  %>
+
+
+
 <div class="view-container">
 <div id="posts-to-test" class="transitions-enabled">
   <% @favorites.each do |fav| %>
@@ -5,6 +10,9 @@
        <%= link_to (image_tag fav.picture.url), fav %>
        <h2><%= link_to fav.title, fav %></h2>
        <p class="user"><%= fav.user.show_name %></p>
+       <p class="user">Tags: <% fav.tags.each do |tag| %>
+                                <%= link_to tag.name, tag_path(tag) %>
+                              <% end %>
         <div class="snippet-content">
             <% if fav.id % 2 == 0 && fav.id % 3 == 0 %>
                 <p class="post-snippet-content"><%= truncate(fav.body, length: (900)) %></p>

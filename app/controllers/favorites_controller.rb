@@ -30,6 +30,11 @@ class FavoritesController < ApplicationController
 
   def index
     @favorites = current_user.favorite_posts
+
+    #--FOR THE NAV MENU---------------------
+    @users = User.all
+    @tags = Tag.all
+    @featured_posts = Post.featured_posts
   end
 
 end

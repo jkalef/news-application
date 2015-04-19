@@ -18,18 +18,21 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
 
-  #after_initialize scope: set_defaults{ }
+  after_initialize :set_defaults
 
 
  #--CLASS METHODS-------------------------------------------
  #used to display users name or email when they are logged in
  def show_name
- 	if first_name || last_name
- 		"#{first_name} #{last_name}".strip.squeeze(" ")
+ 	if first_name
+ 		"#{first_name}".strip.squeeze(" ")
  	else
  		email
  	end
  end        
 
+def set_defaults
+  self.is_admin == false
+end
 
 end

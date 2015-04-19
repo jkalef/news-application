@@ -20,6 +20,7 @@
 //= require masonry/jquery.imagesloaded.min
 //= require masonry/jquery.infinitescroll.min
 //= require masonry/modernizr-transitions
+//= require social-share-button
 //= require_tree .
 
 $(document).ready(function() {

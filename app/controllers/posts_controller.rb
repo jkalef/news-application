@@ -75,6 +75,7 @@ before_action :find_post, only: [:edit, :update, :destroy]
     @comment = Comment.new
     #use this to display all of the comments, sorted by most recent
     @comments = @post.comments.most_recent_comments 
+  
   end
 
 

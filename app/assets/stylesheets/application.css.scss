@@ -19,6 +19,7 @@
  *= require 'masonry/infinitescroll'
  *= require 'masonry/right-to-left'
  *= require 'masonry/transitions'
+ *= require social-share-button
  *= require_self
  */
 
@@ -26,6 +27,7 @@
 
 @import "font-awesome";
 @import "bootstrap";
+
 
 /* -- DIV STYLES ----- */
 
@@ -164,6 +166,11 @@
   margin: 0 auto;
 }
 
+.welcome-text {
+  color: white;
+  margin-top: 15px;
+}
+
 
 /*--SEARCH MENU AREA--*/
 .drop-menu-container {
@@ -284,9 +291,104 @@ button { font-size: 18px; }
 }
 
 
+.centered {
+  text-align: center;
+}
 
 
+.right {
+  float: right;
+}
 
+/*  SHOW PAGE ------------------------------- */
+
+#show-posts {
+  h2 {
+      font-size: 30px;
+      margin: 0;
+      padding: 25px 10px;
+      a {
+        color: #474747;
+      }
+    }
+    .post-information {
+      font-size: 12px;
+      border-top: 1px solid #EAEAEA;
+      padding: 15px;
+      margin: 0;
+    }
+    .post-body {
+      text-align: left;
+      font-size: 14px;
+    }
+}
+
+#action-button-area {
+  text-align: left;
+}
+
+.action-button {
+  display: inline-block;
+}
+
+
+#comment-area {
+  text-align: left;
+  margin: 0;
+    h2 {
+      font-size: 30px;
+      margin: 0;
+      padding-bottom: 10px;
+    }
+    .error-message{
+      color: red;
+    }
+    .comment-details {
+      text-align: left;
+      font-size: 10px;
+    }
+    .comment-content {
+      text-align: left;
+      font-size: 14px;
+    }
+}
+
+/* need to hide this display*/
+#timer-details {
+  display: none;
+}
+
+.time-left-to-edit {
+  color: gray;
+}
+
+.comment-modal {
+  margin: 10px;
+}
+
+
+/*---FOOTER ---------*/
+.footer {
+  background-color: gray;
+  text-align: center;
+  height: 50px;
+  margin-top: 100px;
+  p{
+    color: white;
+    padding-top: 15px;
+  }
+}
+
+
+/*--DEVISE VIEWS ------- */
+
+.row {
+  margin-top: 20px;
+}
+
+.error-message{
+      color: red;
+    }
 
 
 
