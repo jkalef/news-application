@@ -1,4 +1,5 @@
 class HomeController < ApplicationController
+#--DEPRECIATED...not really using this anymore
 
 	#need to define the action for index
 	def index

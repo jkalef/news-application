@@ -21,15 +21,15 @@
 //= require masonry/jquery.infinitescroll.min
 //= require masonry/modernizr-transitions
 //= require social-share-button
+//= require select2
 //= require_tree .
 
 $(document).ready(function() {
 
-    /* MODAL ---------------------------------------------------------------------- */
+    /* EDIT COMMENT MODAL------------------------------------------------------------ */
     $('#mymodal').modal("toggle");
 
-    /* FOR THE DROPDOWN MENUS ------------------------------------------------------- */
-    $('.dropdown-toggle').dropdown()
+    /* FOR THE DROPDOWN SEARCH MENUS ------------------------------------------------------- */
+    $('.dropdown-toggle').dropdown();
   
-//close document.ready
 });

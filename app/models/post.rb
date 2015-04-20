@@ -1,4 +1,5 @@
 class Post < ActiveRecord::Base
+	#allow accessing this data through the post creation form
 	attr_accessor :tag_string
 
 	#---ASSOCIATIONS----------------------------------------
@@ -11,12 +12,10 @@ class Post < ActiveRecord::Base
 	has_many :tagizations, dependent: :nullify
 	has_many :tags, through: :tagizations
 
-	#allow to create tags on the same form as creating a post
-	accepts_nested_attributes_for :tags
-
-
-	has_attached_file :picture, :styles => { :medium => "350x350>" }
-			##url => "/rails_root/public/system/posts/pictures/:id/:style/:basename.:extension"
+	#from paperclip
+	#can allow other sizes if wanted later on
+	has_attached_file :picture, :styles => { :medium => "350x350>" }, 
+																:default_url => "/assets/images/my_pic.jpeg"
 	validates_attachment_content_type :picture, :content_type => /\Aimage\/.*\Z/	
 
 	#VALIDATIONS --------------------------------------------
@@ -30,13 +29,12 @@ class Post < ActiveRecord::Base
 
 	#CLASS METHODS ------------------------------------------
 	#sort the posts by the most recent
-
-
 	def self.latest
 		Post.order("created_at DESC")
 	end
 
-	#for the menu to display featured posts (will just display them randomly)
+	#for the menu to display featured posts (will just display them randomly each time
+	#page is loaded)
 	def self.featured_posts
 		#use the RANDOM() method from postgres
 		Post.order("RANDOM()").limit 10

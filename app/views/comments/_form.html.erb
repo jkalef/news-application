@@ -1,17 +1,16 @@
-<%# Create a new comment %>
+<%# Form to create a new comment %>
 <div class="comment-modal">
-      <% if @comment.errors.any? %>
-        <% @comment.errors.full_messages.each do |msg| %>
-          <p class="error-message">Error: <%= msg %></p>
-        <% end %>
-      <% end %>
-
-      <%# this form will work for both the POST and the PATCH %>
-          <%= form_for [@post, @comment], remote: true do |f| %>
-            <%= f.text_area :body, {class: "form-control", rows: 10, placeholder: "Your comment here..."} %>
-            <br>
-            <%= f.submit "Submit Comment", class: "btn btn-success" %>
-          <% end %>
+  <% if @comment.errors.any? %>
+    <% @comment.errors.full_messages.each do |msg| %>
+      <p class="error-message">Error: <%= msg %></p>
+    <% end %>
+  <% end %>
+  <%# use rails ajax %>
+  <%= form_for [@post, @comment], remote: true do |f| %>
+    <%= f.text_area :body, {class: "form-control", rows: 10, placeholder: "Your comment here..."} %>
+    <br>
+    <%= f.submit "Submit Comment", class: "btn btn-success" %>
+  <% end %>
 </div>
 
 

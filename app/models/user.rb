@@ -18,11 +18,13 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
 
+  #--CALLBACKS-------------------------------------------------
+  #when a new user signs up, set their default status to is_admin: false
   after_initialize :set_defaults
 
 
  #--CLASS METHODS-------------------------------------------
- #used to display users name or email when they are logged in
+ #used to display users first name or email when they are logged in
  def show_name
  	if first_name
  		"#{first_name}".strip.squeeze(" ")
@@ -31,8 +33,9 @@ class User < ActiveRecord::Base
  	end
  end        
 
-def set_defaults
-  self.is_admin == false
-end
+  #for the callback above
+  def set_defaults
+    self.is_admin == false
+  end
 
 end

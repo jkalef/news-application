@@ -1,10 +1,12 @@
 class FavoritesController < ApplicationController
 
+  #create a new favorite
   def create
-    @favorite = current_user.favorites.new
-    @post = Post.find(params[:post_id])
+    #gather all the variables needed for the action, and associate them together
+    @favorite      = current_user.favorites.new
+    @post          = Post.find(params[:post_id])
     @favorite.post = @post
-
+    #use rails ajax
     respond_to do |format|
       if @favorite.save
         format.html { redirect_to root_path, notice: "favorited!" }
@@ -14,13 +16,16 @@ class FavoritesController < ApplicationController
         format.js { render }    
       end
     end
+  #--end create action
   end
 
 
   def destroy
+    #variables needed for the action
     @favorite = current_user.favorites.find(params[:id])
-    @post = @favorite.post
+    @post     = @favorite.post
     @favorite.destroy
+    #use rails ajax
     respond_to do |format|
       format.html { redirect_to root_path, notice: "Unfavorited!" }
       format.js { render }
@@ -29,11 +34,13 @@ class FavoritesController < ApplicationController
 
 
   def index
-    @favorites = current_user.favorite_posts
+    #show all of your favorite posts
+    @posts = current_user.favorite_posts
 
     #--FOR THE NAV MENU---------------------
-    @users = User.all
-    @tags = Tag.all
+    #potentially can be refactered into application controller
+    @users          = User.all
+    @tags           = Tag.all
     @featured_posts = Post.featured_posts
   end
 

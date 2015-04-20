@@ -1,4 +1,5 @@
 class Category < ActiveRecord::Base
+  #-DEPRECIATED...using TAGS instead of categories
 
 	#VALIDATIONS ------------------------------
 

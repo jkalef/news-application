@@ -4,21 +4,18 @@ class Comment < ActiveRecord::Base
 	belongs_to :post
 	belongs_to :user
 
-
-
 	#VALIDATIONS --------------------------------
 	validates :body, presence: true
 
-
-
-
 	#CLASS METHODS ------------------------------
-	#want to sort the comments by most recent
+	
+  #sort the comments by most recent
 	def self.most_recent_comments
 		Comment.order("created_at DESC")
 	end
 
-	# time checker modal
+	#time checker modal...you only have 15 minutes to edit or delete a comment
+  #once it's created
   def time_left(comment) 
     #the maximum time to be able to edit an answer  
     my_time = comment.created_at + 15.minutes
@@ -31,7 +28,13 @@ class Comment < ActiveRecord::Base
     end
   end
 
-
-
+  #server side protection from the timeout function on editing
+  # #comments...still a work in progress
+  # def comment_is_editable
+  #   max_time = comment.created_at + 15.minutes
+  #   if Time.now > max_time
+  #     return false
+  #   end
+  # end
 
 end

@@ -1,34 +1,21 @@
-
-
-	<%# partial used for my posts forms for creating posts and adding posts %>
-
-	<%#add an area to display any errors the come up 
-	when trying to create a post %>
-	<% @post.errors.full_messages.each do |message| %>
-		<span class="error-message"><%= message %></span>
-		<br>
-	<% end %>
+<%# partial to create a new post %>
+<% @post.errors.full_messages.each do |message| %>
+	<span class="error-message"><%= message %></span>
+	<br>
+<% end %>
 		
+<%= form_for @post do |f| %>
+	<%= f.text_field :title, {class: "form-control", placeholder: "Your super-catchy article title here..." } %>
+	<br>
+	<%= f.label :picture %>
+	<%= f.file_field :picture %>
+	<br>
+	<%= f.text_area :body, {class: "form-control", rows: 30, placeholder: "Your amazing article here..."} %>
+	<br>
 
-	<%# put my partial for the form %>
-	<%# going to be used for the new post, @post referenced
-	in my posts_controller %>
-
-
-	<%= form_for @post do |f| %>
-		<%= f.text_field :title, {class: "form-control", placeholder: "Your super-catchy article title here..." } %>
-		<br>
-		<%= f.label :picture %>
-		<%= f.file_field :picture %>
-		<br>
-		 <%= f.text_area :body, {class: "form-control", rows: 30, placeholder: "Your amazing article here..."} %>
-		<br>
-
-		<p>Tags (please seperate each tag with a comma):
-		<%= f.text_field :tag_string, class: "form-control" %></p>
-
-			<%# f.collection_check_boxes :tag_ids, Tag.all, :id, :name %>
+	<p>Tags (please seperate each tag with a comma):
+	<%= f.text_field :tag_string, class: "form-control" %></p>
 	
-			<br>
-		<%= f.submit "Submit Blog Post", {class: ".btn-lg btn btn-success"} %> 
-		<% end %>
+	<br>
+	<%= f.submit "Submit Blog Post", {class: ".btn-lg btn btn-success"} %> 
+<% end %>

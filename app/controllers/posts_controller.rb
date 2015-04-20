@@ -1,64 +1,62 @@
 class PostsController < ApplicationController
+  #--BEFORE ACTIONS--------------------------------------------------
+  #from DEVISE
+  before_action :authenticate_user!, except: [:index, :show]
 
-#--BEFORE ACTIONS--------------------------------------------------
-#from DEVISE
-before_action :authenticate_user!, except: [:index, :show]
-
-#from the private methods below
-before_action :find_post, only: [:edit, :update, :destroy]
+  #from the private methods below
+  before_action :find_post, only: [:edit, :update, :destroy]
 
 
-#--ACTIONS----------------------------------------------------------
-
+  #--ACTIONS----------------------------------------------------------
   def index
-    #--Fun search methods---------
+    #-- FUN SEARCH METHODS --
     #regular search, display normal results
     if params[:commit] == "Search"
-          @posts = Post.search(params[:search_word]).latest
+      @posts = Post.search(params[:search_word]).latest
     #lucky search, display a random result
     elsif params[:commit] == "I'm Feeling Lucky"
-          @post = Post.lucky_search(params[:search_word])
-            #check if there actually are any matches, if not, pick
-            #just a random post from the list to show
-            if defined? @post.id
-              redirect_to post_path(@post)
-            else
-              @post = Post.all.sample
-              redirect_to post_path(@post), notice: "No results matched your search,
+      @post = Post.lucky_search(params[:search_word])
+      #check if there actually are any matches, if not, pick
+      #just a random post from the list to show
+      if defined? @post.id
+        redirect_to post_path(@post)
+      else
+        @post = Post.all.sample
+        redirect_to post_path(@post), notice: "No results matched your search,
                                         but here's a random post anyways!"
-            end
+      end
     else
-    #default view of no search query is made..view the latest posts
-    @posts = Post.latest
+      #default view if no search query is made..view the latest posts
+      @posts = Post.latest
     #--end IF statement for search
     end
 
-    #--FOR THE SEARCH MENUS---------------------------------------
-    @tags = Tag.all
-    @users = User.all
+    #-- FOR THE SEARCH NAV MENUS --
+    #can potentially refactor this into application controller
+    @tags           = Tag.all
+    @users          = User.all
     @featured_posts = Post.featured_posts
-
-  #-close index action
+  #close index action
   end
 
   
   def new
-    #need to instantiate a new Post for our post method to get to
+    #instantiate the necessary variables
     @post = Post.new
-    @tag = Tag.new
+    @tag  = Tag.new
   end
 
-  # POST
-  # URL /posts
+
   def create
-    #pass in the post params
-    #need to get the current users information to show who made the post
+    #attach current user to the created post
     @post = current_user.posts.new(post_params)
-    
+    #attach the tags to the post
     @post.tags << split_the_tags
 
     if @post.save
-      #InterestMailer.notify_interested_users(@post).deliver_later
+      #mailer to email people new posts when they are created with
+      #tags that they are interested in (defined in their user registration)
+      InterestMailer.notify_interested_users(@post).deliver_later
       redirect_to post_path(@post), notice: "post successfuly created"
     else
       render :new
@@ -66,30 +64,22 @@ before_action :find_post, only: [:edit, :update, :destroy]
   end
 
 
-  # GET
-  # URL /posts/:id
   def show
-    #need to find the post to display
     #not included in before_action due to user permissions
-    @post = Post.find(params[:id])
+    @post     = Post.find(params[:id])
     #instantiate a new comment
-    @comment = Comment.new
+    @comment  = Comment.new
     #use this to display all of the comments, sorted by most recent
     @comments = @post.comments.most_recent_comments 
-  
   end
 
 
-  # GET
-  # URL /posts/edit/:id
   def edit
+    #see before_action
   end
 
 
-  # PATCH
-  # URL /posts/:id
   def update
-    #if successful, render the show page
     if @post.update(post_params)
       redirect_to root_path, notice: "post successfully updated!"
     else
@@ -98,39 +88,27 @@ before_action :find_post, only: [:edit, :update, :destroy]
   end
 
 
-  # DELETE
-  # URL /posts/:id
   def destroy
     @post.destroy
     redirect_to posts_path, notice: "Post successfully deleted"
   end
 
-
-  #action to view posts belonging to a specific user
-  def your_posts
-    #@user = User.find(params[:id])
-    @posts = current_user.posts.all
-  end
-
-
   #--CLASS METHODS---------------------------------------------------------
   private
 
-
   def post_params
-    #strong params
-    post_params = params.require(:post).permit(:title, :body, :reading_id, :picture, :tag_string)
-      
+    post_params = params.require(:post).permit(:title, :body, :picture, :tag_string)   
   end
 
   def find_post
-    #method to find a post by its id
     @post = Post.find(params[:id])
     #if the user is not an admin, they can't access the edit, destroy or update actions
     redirect_to root_path alert: "access denied" unless can? :manage, @post
   end
 
-  #split tags entered by the user by commas
+  #split string of tags entered by the user on commas
+  #also will make sure that tags won't appear in the database
+  #more than once
   def split_the_tags
     tags = []
     split_tags = post_params[:tag_string].split(",")
@@ -139,6 +117,7 @@ before_action :find_post, only: [:edit, :update, :destroy]
       tag.save
       tags << tag
     end
+    #return the new array of tags
     tags
   end
 

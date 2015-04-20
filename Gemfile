@@ -54,6 +54,8 @@ group :development, :test do
   gem "faker"
   gem "quiet_assets"
 
+gem 'kaminari'
+gem "select2-rails"
 gem 'delayed_job_active_record'
 gem "delayed_job_web"
 gem "letter_opener", :group => :development

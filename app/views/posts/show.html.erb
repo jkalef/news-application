@@ -1,16 +1,17 @@
 <div class="container">
 	<div class="col-md-10 col-md-offset-1 centered col-sm-12 col-xs-12">
 		<div id="show-posts">
-			<%# display the post using instance variable from the posts_controller %>
 			<h2><%= @post.title %></h2>
-			<p class="post-details">Author: <%= link_to @post.user.show_name, author_posts_path(@post.user) %> <br>
-				Topics: <% @post.tags.each do |tag| %>
-									<%= link_to tag.name, tag_path(tag) %>
-				<% end %>
+			<p class="post-details">
+				Author: <%= link_to @post.user.show_name, author_posts_path(@post.user) %> <br>
+				Topics: 
+					<% @post.tags.each do |tag| %>
+						<%= link_to tag.name, tag_path(tag) %>
+					<% end %>
 				<br>
 				Date Published: <%= @post.created_at %>
 				<br>
-				 <%= social_share_button_tag(@post.title) %>
+			 	<%= social_share_button_tag(@post.title) %>
 			</p>
 			<br>
 			<%= image_tag @post.picture.url(:medium) %>
@@ -18,17 +19,21 @@
 			<br>
 			<p class="post-body"><%= @post.body %></p>
 			<br>
+		<%# close show-posts %>
 		</div>
 
-
-			<%# Add a link to edit the post. Only admins or people who wrote the posts can edit them %>
+			<%# CanCanCan validations: %>
 			<div id="action-button-area">
 				<% if can? :edit, @post %>
-						<div class="action-button"><%= link_to "Edit This Post", edit_post_path(@post), class: "btn btn-primary" %></div>
+						<div class="action-button">
+							<%= link_to "Edit This Post", edit_post_path(@post), class: "btn btn-primary" %>
+						</div>
 				<% end %>
 
 				<% if can? :destroy, @post %>
-					<div class="action-button"><%= button_to "Delete This Post", post_path(@post), method: :delete, data: {confirm: "Are you sure you want to delete?"}, class: "btn btn-danger" %></div>
+					<div class="action-button">
+						<%= button_to "Delete This Post", post_path(@post), method: :delete, data: {confirm: "Are you sure you want to delete?"}, class: "btn btn-danger" %>
+					</div>
 				<% end %>
 			</div>
 			<hr>
@@ -53,8 +58,6 @@
 		</div>
 	
 
-
-
 			<%#---MODAL FOR EDITING A COMMENT -------------------------------------------- %>
 			<!-- Modal -->
 			<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -75,37 +78,29 @@
 
 			<%# only loged in users can add comments %>
 			<%#--Refer to the 'comment form' partial to create a new comment %>
-				<div id="comment-area">
-					<% if user_signed_in? %>
+			<div id="comment-area">
+				<% if user_signed_in? %>
 					<div class="comment-form">
 						<h3>Submit A Comment</h3>
 						<%= render partial: "/comments/form" %>
 					</div>
-					<% end %>
+				<% end %>
 				<br>
-
 				<%#--Refer to comment partial to display all the comments %>
 				<% if user_signed_in? %>
-				<br>
-				<h3>Comments</h3>
-				<hr>
-				<%#-IMPORTANT!!!  For The JS Function -- %>
-				<div class="comments">
-					<% @comments.each do |comment| %>
-						<%= render partial: "/comments/comment", locals: {comment: comment} %>
-					<% end %>
-				</div>
+					<br>
+					<h3>Comments</h3>
+					<hr>
+					<%#-IMPORTANT!!!  For The JS Function -- %>
+					<div class="comments">
+						<% @comments.each do |comment| %>
+							<%= render partial: "/comments/comment", locals: {comment: comment} %>
+						<% end %>
+					</div>
 				<% end %>
-
-				<%#-CLOSE COMMENT AREA %>
-				</div>
-			
-			<%#--CLOSE MID-9 COL %>
+			<%#-CLOSE COMMENT AREA %>
 			</div>
-
-
-
-			
- 
+		<%#--CLOSE MID-10 COL %>
+		</div> 
 <%#- CLOSE MAIN CONTAINER --------- %>
 </div>

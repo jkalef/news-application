@@ -1,5 +1,6 @@
+<%# display all of the users and actions available in a table %>
 <div class="container">
-  <h1>Welcome <%= current_user.show_name %></h1>
+  <h2>Welcome <em><%= current_user.show_name %></em></h2>
   <table class="table">
     <tr>  
       <th>Name</th>
@@ -8,7 +9,7 @@
       <th>Delete User</th>
     </td>
     <% @users.each do |user| %>
-    <tr>
+      <tr>
         <td><%= user.show_name %></td>
         <td><%= user.email %></td>
         <%# --- buttons for changing user permissions --- %>
@@ -19,7 +20,9 @@
         <td>
           <%= render partial: "/admin/users/delete", locals: {user: user} %>
         </td>
-    </tr>
-      <% end %>
+      </tr>
+    <%# end loop ---- %>
+    <% end %>
   </table>
+<%# close main div --- %>
 </div>

@@ -1,12 +1,14 @@
 class Admin::UsersController < Admin::BaseController
-  #we want to show users, update users, and delete users
+
   def index
     #use this to display all of the users in a table
     @users = User.all
   end
 
+  #change status of users from admin to non-admin
   def update
     @user = User.find(params[:id])
+    #use rails ajax
     respond_to do |format|
       if @user.update(user_params)
         format.html { redirect_to admin_users_path, notice: "User Updated" }
@@ -18,9 +20,11 @@ class Admin::UsersController < Admin::BaseController
     end
   end
 
+  #use this to delete a user 
   def destroy
     @user = User.find(params[:id])
     @user.destroy
+    #use rails ajax
     respond_to do |format|
       format.html { redirect_to admin_users_path, notice:"User Deleted" }
       format.js { render }

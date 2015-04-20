@@ -1,12 +1,14 @@
 class ContactsController < ApplicationController
 
+
   def index
     @contact = Contact.new
   end
 
-
+    #--FOR THE CONTACT FORM MODAL
   def create
     @contact = Contact.new(contact_params)
+    #setup with Rails Ajax...not actually using it though, just rendering the HTML
     respond_to do |format|
       if @contact.save
         format.html {redirect_to root_path, notice: "Thank you for you contacting us"}

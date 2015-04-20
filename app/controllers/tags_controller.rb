@@ -1,11 +1,14 @@
 class TagsController < ApplicationController
 
   def show
-     @tag = Tag.find(params[:id])
+     #display all of the posts with this tag/topic
+     @tag   = Tag.find(params[:id])
      @posts = @tag.posts 
 
-     @tags = Tag.all
-     @users = User.all
+     #--FOR THE NAV MENUS
+     #-refactor into application controller...
+     @tags           = Tag.all
+     @users          = User.all
      @featured_posts = Post.featured_posts
   end
 

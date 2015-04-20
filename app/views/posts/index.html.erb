@@ -1,44 +1,9 @@
-
 <!-- DISPLAY THE MENUS -->
 <%= render partial: "/layouts/menus", locals: {tags: @tags, user: @users, featured_posts: @featured_posts}  %>
 
-
-<!--DISPLAY POSTS -->
-<div class="view-container">
-<div id="posts-to-test" class="transitions-enabled">
-  <% @posts.each do |post| %>
-    <div class="box panel panel-default">
-       <%= link_to (image_tag post.picture.url), post %>
-       <h2><%= link_to post.title, post %></h2>
-       <p class="user">Author: <%= link_to post.user.show_name, author_posts_path(post.user) %></p>
-       <p class="user">Tags: <% post.tags.each do |tag| %>
-                                <%= link_to tag.name, tag_path(tag) %>
-                              <% end %>
-        </p>
-        <div class="snippet-content">
-            <%# FIZZBUZZ to make sure the boxes are different sizes!! %>
-            <% if post.id % 2 == 0 && post.id % 3 == 0 %>
-                <p class="post-snippet-content"><%= truncate(post.body, length: (200)) %></p>
-            <% elsif post.id % 2 == 0 %>
-                <p class="post-snippet-content"><%= truncate(post.body, length: (600)) %></p>
-            <% elsif post.id % 3 == 0 %>
-              <p class="post-snippet-content"><%= truncate(post.body, length: (300)) %></p>
-            <% else %>
-                 <p class="post-snippet-content"><%= truncate(post.body, length: (400)) %></p>
-            <% end %>
-            </div>
-            <div class="button-area">
-                <%= render partial: "/favorites/favorite", locals: {post: post} %>
-            </div>
-            <div class="social-share-buttons">
-                  <%# from the social_share gem.  Will only work as a live app, 
-                  and not from localhost %>
-                  <%= social_share_button_tag(post.title) %>
-            </div>       
-    </div>
-    <% end %>
-</div>
-</div>
+<%# display all posts %>
+<%# add infinite scrolling if too many posts get posted %>
+<%= render partial: "/layouts/fizzbuzz" %>
 
 
 

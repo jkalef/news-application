@@ -1,17 +1,18 @@
 class CommentsController < ApplicationController
 
-#---BEFORE ACTIONS--------------------------------------------
-#from DEVISE
-before_action :authenticate_user!
+	#---BEFORE ACTIONS--------------------------------------------
+	#from DEVISE
+	before_action :authenticate_user!
 
 
-#---ACTIONS-----------------------------------------------------
+	#---ACTIONS----------------------------------------------------
 	def create
-		@post			= Post.find(params[:post_id])
-		@comment  = current_user.comments.new(comment_params)
-
-		#this associates the comment to the specific post_id
+		#variables needed to create a new comment, and attached it
+		#to the post and current_user
+		@post						= Post.find(params[:post_id])
+		@comment  			= current_user.comments.new(comment_params)
 		@comment.post 	= @post
+		#use rails ajax
 		respond_to do |format|
 				if @comment.save
 					#email post creater if the comment was saved
@@ -25,18 +26,20 @@ before_action :authenticate_user!
 		end
 	end
 
+
 	def edit
-		@post = Post.find(params[:post_id])
+		@post 	 = Post.find(params[:post_id])
 		@comment = Comment.find(params[:id])
+		#use CanCanCAn to secure this action
 		redirect_to root_path alert: "access denied" unless can? :manage, @comment
 	end
 
+
 	def update
-		@post = Post.find(params[:post_id])
+		#retrieve the necessary variables for the action
+		@post 	 = Post.find(params[:post_id])
 		@comment = Comment.find(params[:id])
-		#comment editable ... write a scope, and change these
-		#to be @comment.editable
-		
+		#use rails ajax
 		respond_to do |format|
 			if @comment.update(comment_params)
 				format.html { redirect_to @post, notice: "answer updated!"}
@@ -50,20 +53,20 @@ before_action :authenticate_user!
 
 
 	def destroy
-		@post = Post.find(params[:post_id])
+		#retrieve the variables needed for the action
+		@post 	 = Post.find(params[:post_id])
 		@comment = Comment.find(params[:id])
+		#use CanCanCan to secure this action
 		redirect_to root_path alert: "access denied" unless can? :manage, @comment
-
-
-			@comment.destroy		
-			respond_to do |format|
-				format.html { redirect_to post_path(@post), notice: "record deleted" }
-				format.js { render }
-			end
+		@comment.destroy
+		#use rails ajax		
+		respond_to do |format|
+			format.html { redirect_to post_path(@post), notice: "record deleted" }
+			format.js { render }
+		end
 	end
 
-
-#--CLASS METHODS---------------------------------------------------
+	#--CLASS METHODS---------------------------------------------------
 	private
 
 	def comment_params

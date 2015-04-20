@@ -4,7 +4,6 @@
       <div class="panel-heading">
           Create Your Account
       </div>
-
             <div class="panel-body">
             <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
             <%= devise_error_messages! %>
@@ -19,6 +18,7 @@
               <%= f.text_field :last_name, class: "form-control"  %>
             </div>
 
+            <%# allow user to set interests %>
             <div class="form-group">
               <p>Select Some Interests:</p>
               <%= f.collection_check_boxes :tag_ids, Tag.unique_tags, :id, :name %>
@@ -48,7 +48,7 @@
           <% end %>
 
           <%= render "devise/shared/links" %>
-    </div>
+      </div>
     </div>
   </div>
 </div>

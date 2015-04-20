@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
 	root "posts#index"
 
+	#for the contact us form
 	resources :contacts, only: [:create, :index]
 
 	#POSTS, COMMENT & TAGS ROUTES ----------------------------------------
@@ -15,18 +16,15 @@ Rails.application.routes.draw do
 		resources :tags, only: [:create, :show]
 	end
 
+	#admin backend
 	namespace :admin do
 		resources :users
 	end
-
-	#this will list the posts only created by that user
-	get "/posts/:user_id" => "posts#your_posts", as: :your_posts
 
 	#from delayed_job_web GEM-----------------------------------------
 	match "/delayed_job" => DelayedJobWeb, :anchor => false, via: [:get, :post]
 
 	#use this route to display your favorites
-	#defined current_user favorites in the favorites controller
 	resources :favorites, only: [:index]
 
 	#use this route to display posts relating to tags
