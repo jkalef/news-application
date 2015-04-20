@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+  #instantiates a new contact request
+  before_action :contact_form_create
 
 #def after_sign_up_path_for(resource)
  #   request.env['omniauth.origin'] || stored_location_for(resource) || new_post_path
@@ -17,6 +19,12 @@ class ApplicationController < ActionController::Base
     else    
       request.env['omniauth.origin'] || stored_location_for(resource) || root_path
     end
+  end
+
+  #need to instantiate a new Contact form variable for each page of the app
+  #for people to contact us through the modal
+  def contact_form_create
+    @contact = Contact.new
   end
 
 

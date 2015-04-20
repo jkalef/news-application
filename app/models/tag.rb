@@ -5,7 +5,7 @@ class Tag < ActiveRecord::Base
     has_many :posts, through: :tagizations
 
     has_many :interests, dependent: :destroy
-    has_many :users, through: :interests, source: :user
+    has_many :interested_users, through: :interests, source: :user
 
     #--VALIDATIONS-----------------------------------
     #only one tag of the same name can exist

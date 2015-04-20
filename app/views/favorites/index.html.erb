@@ -9,7 +9,7 @@
     <div class="box panel panel-default">
        <%= link_to (image_tag fav.picture.url), fav %>
        <h2><%= link_to fav.title, fav %></h2>
-       <p class="user"><%= fav.user.show_name %></p>
+       <p class="user"><%= link_to fav.user.show_name, author_posts_path(fav.user) %></p>
        <p class="user">Tags: <% fav.tags.each do |tag| %>
                                 <%= link_to tag.name, tag_path(tag) %>
                               <% end %>
@@ -25,14 +25,11 @@
             <% end %>
             </div>
             <div class="button-area">
-                <%= link_to "Read More", post_path(fav), class: "btn btn-success"%>
-                <%# render partial: "/favorites/favorite", locals: {favorite: favorite} %>
+                <%# link_to "Read More", post_path(fav), class: "btn btn-success"%>
+                <%= render partial: "/favorites/favorite", locals: {post: fav} %>
             </div>
             <div class="social-share-buttons">
-                  <i class="fa fa-facebook-official fa-2x"></i>
-                  <i class="fa fa-twitter-square fa-2x"></i>
-                  <i class="fa fa-pinterest-square fa-2x"></i>
-                  <i class="fa fa-tumblr-square fa-2x"></i>
+                <%= social_share_button_tag(fav.title) %>
             </div>       
     </div>
     <% end %>

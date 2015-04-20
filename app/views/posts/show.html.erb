@@ -3,7 +3,7 @@
 		<div id="show-posts">
 			<%# display the post using instance variable from the posts_controller %>
 			<h2><%= @post.title %></h2>
-			<p class="post-details">Author: <%= @post.user.show_name %> <br>
+			<p class="post-details">Author: <%= link_to @post.user.show_name, author_posts_path(@post.user) %> <br>
 				Topics: <% @post.tags.each do |tag| %>
 									<%= link_to tag.name, tag_path(tag) %>
 				<% end %>
@@ -36,6 +36,8 @@
 
 
 		<!-- SHOW POSTS RELATED TO THIS ONE -->
+		<!--if this gets excessive, add a limit to how many can be shown,
+		or just select a random subset of them -->
 		<div class="related-posts">
 			<h3>Related Posts:</h3>
 			<% @post.tags.each do |tag| %>

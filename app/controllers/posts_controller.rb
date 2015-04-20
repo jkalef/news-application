@@ -58,6 +58,7 @@ before_action :find_post, only: [:edit, :update, :destroy]
     @post.tags << split_the_tags
 
     if @post.save
+      #InterestMailer.notify_interested_users(@post).deliver_later
       redirect_to post_path(@post), notice: "post successfuly created"
     else
       render :new

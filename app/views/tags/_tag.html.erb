@@ -5,7 +5,7 @@
     <div class="box panel panel-default">
        <%= link_to (image_tag post.picture.url), post %>
        <h2><%= link_to post.title, post %></h2>
-       <p class="user">Author: <%= post.user.show_name %></p>
+       <p class="user">Author: <%= link_to post.user.show_name, author_posts_path(post.user)%></p>
        <p class="user">Tags: <% post.tags.each do |tag| %>
                                 <%= tag.name %>
                               <% end %>
@@ -26,10 +26,7 @@
                 <%= render partial: "/favorites/favorite", locals: {post: post} %>
             </div>
             <div class="social-share-buttons">
-                  <i class="fa fa-facebook-official fa-2x"></i>
-                  <i class="fa fa-twitter-square fa-2x"></i>
-                  <i class="fa fa-pinterest-square fa-2x"></i>
-                  <i class="fa fa-tumblr-square fa-2x"></i>
+                  <%= social_share_button_tag(post.title) %>
             </div>       
     </div>
     <% end %>

@@ -10,8 +10,4 @@ class HomeController < ApplicationController
 	end
 
 
-	#define the action for contact
-	def contact
-	end
-
 end
