@@ -5,8 +5,7 @@ Rails.application.routes.draw do
 	devise_for :users, :controllers => { :registrations => "registrations" }
 
 	root "posts#index"
-	#get "/about" => "home#about", as: :about
-	#get "/contact" => "home#contact", as: :contact
+
 	resources :contacts, only: [:create, :index]
 
 	#POSTS, COMMENT & TAGS ROUTES ----------------------------------------

@@ -37,7 +37,7 @@
           <ul class="nav navbar-nav navbar-right">
             <!--display this nav bar if the user is signed in -->
             <% if user_signed_in? %>
-              <li class="welcome-text"><em>Welcome Back: <%= current_user.show_name %></em></li>
+              <li class="welcome-text"><em>Welcome Back:  <%= current_user.show_name %></em></li>
               <li><%= link_to "Create A Post", new_post_path, class: "btn btn-success my-btn" %></li>
               <li><%= link_to "View Favorites", favorites_path, class: "btn btn-primary my-btn" %></li>
               <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete, class: "btn btn-danger my-btn" %></li>
@@ -110,6 +110,7 @@
       <div class="contact-modal-content">
           <%= render partial: "/contacts/contactform" %>
       </div>
+      
     </div>
   </div>
 </div>
