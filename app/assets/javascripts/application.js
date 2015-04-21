@@ -13,7 +13,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap
-//= require turbolinks
 //= require masonry/masonry.min
 //= require masonry/jquery.masonry
 //= require masonry/jquery.event-drag
