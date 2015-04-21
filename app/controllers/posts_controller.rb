@@ -56,7 +56,7 @@ class PostsController < ApplicationController
     if @post.save
       #mailer to email people new posts when they are created with
       #tags that they are interested in (defined in their user registration)
-      InterestMailer.notify_interested_users(@post).deliver_later
+      InterestMailer.notify_interested_users(@post).deliver
       redirect_to post_path(@post), notice: "post successfuly created"
     else
       render :new
