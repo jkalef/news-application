@@ -12,5 +12,23 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
+//= require bootstrap
+//= require masonry/masonry.min
+//= require masonry/jquery.masonry
+//= require masonry/jquery.event-drag
+//= require masonry/jquery.imagesloaded.min
+//= require masonry/jquery.infinitescroll.min
+//= require masonry/modernizr-transitions
+//= require social-share-button
+//= require select2
 //= require_tree .
+
+$(document).ready(function() {
+
+    /* EDIT COMMENT MODAL------------------------------------------------------------ */
+    $('#mymodal').modal("toggle");
+
+    /* FOR THE DROPDOWN SEARCH MENUS ------------------------------------------------------- */
+    $('.dropdown-toggle').dropdown();
+  
+});

@@ -1,6 +1,12 @@
 source 'https://rubygems.org'
 
+gem "font-awesome-rails"
+gem "paperclip", "~> 4.2"
 
+#add user authentication
+gem "devise"
+
+gem 'bootstrap-sass'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.1'
 # Use postgresql as the database for Active Record
@@ -17,7 +23,7 @@ gem 'coffee-rails', '~> 4.1.0'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-gem 'turbolinks'
+#gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
@@ -41,5 +47,22 @@ group :development, :test do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+
+  gem "interactive_editor"
+  gem "awesome_print"
+  gem "hirb"
+  gem "faker"
+  gem "quiet_assets"
+
+gem 'kaminari'
+gem "select2-rails"
+gem 'delayed_job_active_record'
+gem "delayed_job_web"
+gem "letter_opener", :group => :development
+gem 'masonry-rails'
+gem 'cancancan', '~> 1.10'
+gem 'social-share-button'
+
+
 end
 

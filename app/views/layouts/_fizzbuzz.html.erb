@@ -1,0 +1,55 @@
+<%# FIZZBUZZ MASONRY LAYOUR FOR THE POSTS  %>
+<div class="view-container">
+  <div id="posts-to-test" class="transitions-enabled">
+    <%# iterate over the posts ---------- %>
+    <% @posts.each do |post| %>
+      <div class="box panel panel-default">
+        <%# from paperclip %>
+        <%= link_to (image_tag post.picture.url), post %>
+          <%# link to the post itself through the title %>
+          <h2><%= link_to post.title, post %></h2>
+          <p class="user">Author: <%= link_to post.user.show_name, author_posts_path(post.user) %></p>
+
+          <%# --------loops through the tags, and link to each tag show page ------- %>
+          <p class="user">
+            Tags: 
+              <% post.tags.each do |tag| %>
+                <%= link_to tag.name, tag_path(tag) %>
+            <% end %>
+          </p>
+          <p class="user">
+            Date Published:
+              <%= post.created_at %>
+          </p>
+
+        <%# show the post content snippets, truncated on different amounts %>
+        <div class="snippet-content">
+          <% if post.id % 2 == 0 && post.id % 3 == 0 %>
+            <p class="post-snippet-content"><%= truncate(post.body, length: (900)) %></p>
+          <% elsif post.id % 2 == 0 %>
+            <p class="post-snippet-content"><%= truncate(post.body, length: (200)) %></p>
+          <% elsif post.id % 3 == 0 %>
+            <p class="post-snippet-content"><%= truncate(post.body, length: (500)) %></p>
+          <% else %>
+            <p class="post-snippet-content"><%= truncate(post.body, length: (100)) %></p>
+          <% end %>
+        </div>
+
+        <%# area for read-more and favorite buttons %>
+        <div class="button-area">
+          <%# partial contains the button view to read more and add favorites %>
+          <%= render partial: "/favorites/favorite", locals: {post: post} %>
+        </div>
+        <%# social share button area %>
+        <div class="social-share-buttons">
+          <%= social_share_button_tag(post.title) %>
+        </div>
+
+      <%# -- close the box panel %>
+      </div>
+    <%# end the loop for iterating over the posts %>
+    <% end %>
+  <%# close secondary container %>
+  </div>
+<%# close view-container %>
+</div>

@@ -1,0 +1,10 @@
+<%# navigation menu -------- %>
+<%= render partial: "/layouts/menus", locals: {tags: @tags, user: @users, featured_posts: @featured_posts}  %>
+
+<div class="container">
+  <h3 style="text-align: center">Your favorite posts:</h3>
+</div>
+
+
+<%# list the posts -------- %>
+<%= render partial: "/layouts/fizzbuzz" %>

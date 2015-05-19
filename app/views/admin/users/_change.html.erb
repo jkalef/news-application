@@ -1,0 +1,8 @@
+<%# partial for updating a users permissions %>
+<div id="<%= dom_id(user) %>">          
+  <% if user.is_admin? %>
+    <%= link_to "Make Normal User", admin_user_path(user, user: {is_admin: :false}), remote: true, method: :patch, class: "btn btn-primary" %>
+  <% else %>
+    <%= link_to "Make Admin", admin_user_path(user, user: {is_admin: :true}), remote: true, method: :patch, class: "btn btn-success" %>  
+  <% end %>
+</div>

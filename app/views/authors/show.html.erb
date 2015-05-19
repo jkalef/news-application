@@ -1,0 +1,10 @@
+<%# navigation menu -------- %>
+<%= render partial: "/layouts/menus", locals: {tags: @tags, user: @users, featured_posts: @featured_posts}  %>
+
+<%#--intro to the author %>
+<div class="container">
+  <h3 style="text-align: center">Posts written by: <em><%= @author.show_name %></em>:</h3>
+</div>
+
+<%# layout for the posts ------ %>
+<%= render partial: "/layouts/fizzbuzz" %>

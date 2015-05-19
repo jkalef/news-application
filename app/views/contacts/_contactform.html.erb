@@ -1,0 +1,21 @@
+<%# contact us form %>
+<div class="contact-us-modal-container">
+  <%= form_for @contact do |f| %>
+    <%= f.label :name %>
+    <%= f.text_field :name, class: "form-control" %>
+    <br>
+    <%= f.label :subject %>
+    <%= f.text_field :subject, class: "form-control" %>
+    <br>
+    <%= f.label :email %>
+    <%= f.text_field :email, class: "form-control" %>
+    <br>
+    <%= f.label :message %>
+    <%= f.text_area :message, class: "form-control" %>
+    <br>
+    <%= f.submit "Submit Contact Request", class: "btn btn-primary" %>
+  <% end %>
+</div>
+
+
+

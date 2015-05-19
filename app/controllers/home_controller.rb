@@ -1,4 +1,5 @@
 class HomeController < ApplicationController
+#--DEPRECIATED...not really using this anymore
 
 	#need to define the action for index
 	def index
@@ -9,9 +10,5 @@ class HomeController < ApplicationController
 	def about
 	end
 
-
-	#define the action for contact
-	def contact
-	end
 
 end

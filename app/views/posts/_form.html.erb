@@ -1,0 +1,21 @@
+<%# partial to create a new post %>
+<% @post.errors.full_messages.each do |message| %>
+	<span class="error-message"><%= message %></span>
+	<br>
+<% end %>
+		
+<%= form_for @post do |f| %>
+	<%= f.text_field :title, {class: "form-control", placeholder: "Your super-catchy article title here..." } %>
+	<br>
+	<%= f.label :picture %>
+	<%= f.file_field :picture %>
+	<br>
+	<%= f.text_area :body, {class: "form-control", rows: 30, placeholder: "Your amazing article here..."} %>
+	<br>
+
+	<p>Tags (please seperate each tag with a comma):
+	<%= f.text_field :tag_string, class: "form-control" %></p>
+	
+	<br>
+	<%= f.submit "Submit Blog Post", {class: ".btn-lg btn btn-success"} %> 
+<% end %>
